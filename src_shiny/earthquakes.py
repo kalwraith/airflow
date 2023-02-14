@@ -1,7 +1,7 @@
 import requests
 import pandas as pd
 import io
-from postgres import Postgres
+#from postgres import Postgres
 
 from airflow.providers.postgres.hooks.postgres import PostgresHook
 class Earthquakes():
