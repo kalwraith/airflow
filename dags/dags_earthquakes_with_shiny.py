@@ -10,7 +10,7 @@ t1 = PythonOperator(
     task_id='delete earthquakes',
     python_callable=earthquakes.del_data,
     op_kwargs={'starttime': "{{ prev_ds }}", 'endtime': "{{ next_ds }}"},
-    dags=dag
+    dag=dag
 )
 
 t2 = PythonOperator(
