@@ -7,14 +7,14 @@ dag = DAG(dag_id='dags_earthquakes_with_shiny',
 
 earthquakes = Earthquakes()
 t1 = PythonOperator(
-    task_id='delete earthquakes',
+    task_id='delete_earthquakes',
     python_callable=earthquakes.del_data,
     op_kwargs={'starttime': "{{ prev_ds }}", 'endtime': "{{ next_ds }}"},
     dag=dag
 )
 
 t2 = PythonOperator(
-    task_id='insert earthquakes',
+    task_id='insert_earthquakes',
     python_callable=earthquakes.insrt_data,
     op_kwargs={'starttime': "{{ prev_ds }}", 'endtime': "{{ next_ds }}"},
     dag=dag
