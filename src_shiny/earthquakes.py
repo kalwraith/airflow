@@ -3,6 +3,7 @@ import pandas as pd
 import io
 from postgres import Postgres
 
+from airflow.providers.postgres.hooks.postgres import PostgresHook
 class Earthquakes():
     def _get_data(self, starttime, endtime):
         base_url = f'https://earthquake.usgs.gov/fdsnws/event/1/query?format=csv&starttime={starttime}&endtime={endtime}'
@@ -18,7 +19,9 @@ class Earthquakes():
 
 
     def _set_postgres_conn(self):
-        self.postgres_conn = Postgres(dbname='custom',user='hyunjinkim',passwd='hyunjinkim')
+        self.hook = PostgresHook(postgres_conn_id='conn-postgres-custom')
+        self.postgres_conn = self.hook.get_conn()
+        #self.postgres_conn = Postgres(dbname='custom',user='hyunjinkim',passwd='hyunjinkim')
 
 
     def del_data(self, starttime, endtime):
