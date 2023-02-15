@@ -1,6 +1,6 @@
 from airflow.models import DAG
 from airflow.operators.python import PythonOperator
-from src_shiny.earthquakes import Earthquakes
+from plugins.earthquakes import Earthquakes
 from datetime import datetime
 
 xxxx = DAG(dag_id='dags_earthquakes_with_shiny',
