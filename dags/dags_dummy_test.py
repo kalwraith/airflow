@@ -47,5 +47,6 @@ t8 = DummyOperator(
     dag=dummy_dag
 )
 
-[t1, t2] >> t3 >> t4 >> [t6, t7] >> t8
+[t1, t2] >> t3 >> t4
 t5 >> t4
+[t6, t7] >> t8
