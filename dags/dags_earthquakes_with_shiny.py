@@ -29,7 +29,7 @@ t2 = PythonOperator(
 
 t3 = BashOperator(
     task_id='log_task_result',
-    bash_command=f'echo $HOSTNAME',
+    bash_command='echo "good nice" > /opt/airflow/plugins/{{ data_interval_end | ds }}.log',
     dag=earthquakes_dag
 )
 
