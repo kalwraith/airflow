@@ -9,16 +9,16 @@ dag = DAG(dag_id='dags_show_templates_variables',
 
 t1 = BashOperator(
     task_id='show_template_variables',
-    bash_command='echo {{ dag_run.logical_date | ds }}; \
-     echo {{ dag_run.logical_date | ds_nodash }}; \
-     echo {{ dag_run.logical_date | ts }}; \
-     echo {{ prev_data_interval_start_success | ds }}; \
-     echo {{ prev_data_interval_end_success | ds }}; \
-     echo {{ prev_start_date_success | ds }}; \
-     echo {{ dag }}; \
-     echo {{ task }}; \
-     echo {{ macros }}; \
-     echo {{ task_instance }};',
+    bash_command='echo "dag_run.logical_date | ds: {{ dag_run.logical_date | ds }}"; \
+     echo "dag_run.logical_date | ds_nodash: {{ dag_run.logical_date | ds_nodash }}"; \
+     echo "dag_run.logical_date | ts: {{ dag_run.logical_date | ts }}"; \
+     echo "prev_data_interval_start_success | ds: {{ prev_data_interval_start_success | ds }}"; \
+     echo "prev_data_interval_end_success | ds: {{ prev_data_interval_end_success | ds }}"; \
+     echo "prev_start_date_success | ds: {{ prev_start_date_success | ds }}"; \
+     echo "dag: {{ dag }}"; \
+     echo "task: {{ task }}"; \
+     echo "macros: {{ macros }}"; \
+     echo "task_instance: {{ task_instance }}";',
     dag=dag
 )
 
