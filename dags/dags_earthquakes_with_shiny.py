@@ -29,7 +29,7 @@ t2 = PythonOperator(
 
 t3 = BashOperator(
     task_id='log_task_result',
-    bash_command=f'echo "api get count: {str(earthquakes.data_len)}" > ' + '{{ data_interval_end | ds }}.log',
+    bash_command=f'ip addr',
     dag=earthquakes_dag
 )
 
