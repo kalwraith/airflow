@@ -5,6 +5,9 @@ import io
 
 from airflow.providers.postgres.hooks.postgres import PostgresHook
 class Earthquakes():
+    def __init__(self):
+        self.data_len = -1
+        
     def _get_data(self, starttime, endtime):
         base_url = f'https://earthquake.usgs.gov/fdsnws/event/1/query?format=csv&starttime={starttime}&endtime={endtime}'
         headers = {'Content-Type': 'application/json',
