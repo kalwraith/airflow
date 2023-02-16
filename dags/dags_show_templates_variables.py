@@ -19,7 +19,7 @@ t1 = BashOperator(
      echo {{ task }}; \
      echo {{ macros }}; \
      echo {{ task_instance }};',
-    dag=earthquakes_dag
+    dag=dag
 )
 
 t1
