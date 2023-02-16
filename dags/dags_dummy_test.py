@@ -22,7 +22,7 @@ t3 = DummyOperator(
     dag=dummy_dag
 )
 
-t4 = D1ummyOperator(
+t4 = DummyOperator(
     task_id='dummy_t4',
     dag=dummy_dag
 )
