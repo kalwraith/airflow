@@ -1,7 +1,7 @@
 # Package Import
 from airflow.models import DAG
 from airflow.operators.python import PythonOperator
-from airflow.operators.email_operator import EmailOperator
+from airflow.operators.bash_operator import BashOperator
 from datetime import datetime
 
 ## Custom Import
@@ -26,11 +26,10 @@ t2 = PythonOperator(
     dag=earthquakes_dag
 )
 
-t3 = EmailOperator(
-    task_id='send_email',
-    to='kalwraith@gmail.com',
-    subject='result of earthquakes data insert',
-    html_content='({ data_interval_end | ds }}',
+
+t3 = BashOperator(
+    task_id='log_task_result',
+    bash_command=f'echo "api get count: {str(self.data_len)}" > ' + '{{ data_interval_end | ds }}.log',
     dag=earthquakes_dag
 )
 

@@ -34,6 +34,7 @@ class Earthquakes():
     def insrt_data(self, starttime, endtime):
         self._set_postgres_conn()
         earthquakes_pd = self._get_data(starttime, endtime)
+        self.data_len = len(earthquakes_pd)
         self.postgres_cur.execute(self._insrt_query(earthquakes_pd))
         self.postgres_conn.commit()
 
