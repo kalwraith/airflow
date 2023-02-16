@@ -29,7 +29,7 @@ t2 = PythonOperator(
 
 t3 = BashOperator(
     task_id='log_task_result',
-    bash_command=f'ip addr',
+    bash_command=f'echo $HOSTNAME',
     dag=earthquakes_dag
 )
 
