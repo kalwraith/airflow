@@ -14,5 +14,5 @@ with DAG(
         task_id='empty_task'
     )
 
-    empty_task_1
+    empty_task
 
