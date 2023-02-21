@@ -11,7 +11,7 @@ dag = DAG(dag_id='dags_base_branch_operator',
 
 
 class BaseBashOperator(BaseBranchOperator):
-    def choose_branch(self, context: Context) -> str | Iterable[str]:
+    def choose_branch(self, context):
         if context['data_interval_start'].day == 21:
             return 'bash_branch_task1'
         else:
