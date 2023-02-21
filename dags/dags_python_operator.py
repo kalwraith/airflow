@@ -12,8 +12,8 @@ def select_random():
 
 
 def common_func(**context):
-    selected = context['selected']
-    print(selected)
+    params = context['params']
+    print(params['selected'])
 
 with DAG(
     dag_id='dags_python_operator',
