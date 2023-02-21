@@ -30,7 +30,7 @@ t4 = EmptyOperator(
 
 t5 = EmptyOperator(
     task_id='dummy_t5',
-    dag=dummy_dag
+    dag=empty_dag
 )
 
 t6 = EmptyOperator(
