@@ -1,7 +1,7 @@
 # Package Import
-from airflow.models import DAG
+from airflow import DAG
 from airflow.operators.python import PythonOperator
-from airflow.operators.bash_operator import BashOperator
+from airflow.operators.bash import BashOperator
 from datetime import datetime
 
 ## Custom Import

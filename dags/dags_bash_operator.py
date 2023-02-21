@@ -1,6 +1,6 @@
 # Package Import
-from airflow.models import DAG
-from airflow.operators.bash_operator import BashOperator
+from airflow import DAG
+from airflow.operators.bash import BashOperator
 from datetime import datetime
 
 dag = DAG(dag_id='dags_bash_operator',

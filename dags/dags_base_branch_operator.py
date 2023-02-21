@@ -1,5 +1,5 @@
 # Package Import
-from airflow.models import DAG
+from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.operators.branch import BaseBranchOperator
 from airflow.operators.empty import EmptyOperator
