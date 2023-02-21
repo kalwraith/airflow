@@ -7,7 +7,7 @@ import random
 
 def select_random():
     task_lst = ['task_a','task_b','task_c','task_d']
-    select = random.randint(1,4)
+    select = random.randint(0,3)
     return task_lst[select]
 
 
