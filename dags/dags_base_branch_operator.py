@@ -7,18 +7,19 @@ from datetime import datetime
 
 dag = DAG(dag_id='dags_base_branch_operator',
           start_date=datetime(2023,2,20),
-          schedule_interval='0 1 * * *')
+          schedule_interval='*/5 * * * *')
 
 
 class BaseBashOperator(BaseBranchOperator):
     def choose_branch(self, context):
-        if context['data_interval_start'].day == 21:
+        ts = datetime.strptime(context['ts'], '%Y-%m-%dT%H:%M:%S+00:00')
+        if int(divmod(ts.minute,2)[1]) == 0:
             return 'bash_branch_task1'
         else:
             return 'empty_task_1'
 
 
-bash_branch_task1 = BaseBranchOperator(
+bash_branch_task1 = BashOperator(
     task_id='bash_branch_task1',
     bash_command='/opt/airflow/plugins/shell/select_fruit.sh Orange',
     dag=dag
