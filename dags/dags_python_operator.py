@@ -7,7 +7,7 @@ def python_function(**kwargs):
     print(kwargs)
 
 
-def python_fuction2(**kwargs):
+def python_function2(**kwargs):
     print(kwargs)
 
 with DAG(
