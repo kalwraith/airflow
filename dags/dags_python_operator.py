@@ -8,7 +8,10 @@ def python_function(**kwargs):
 
 
 def python_function2(**kwargs):
-    print(kwargs)
+    name = kwargs['name'] or {}
+    address = kwargs['address'] or {}
+    print(name)
+    print(address)
 
 with DAG(
     dag_id='dags_python_operator',
