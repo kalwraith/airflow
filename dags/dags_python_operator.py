@@ -4,10 +4,7 @@ from airflow.operators.python import PythonOperator
 
 
 def python_function(**kwargs):
-    ti = kwargs['ti']
-    data_interval_end = kwargs['data_interval_end']
-    print(ti)
-    print(data_interval_end)
+    print(kwargs)
 
 
 
