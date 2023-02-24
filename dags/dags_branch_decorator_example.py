@@ -3,10 +3,12 @@ from airflow import DAG
 from airflow.operators.bash import BashOperator
 from airflow.decorators import task
 from datetime import datetime
+import random
 
 with DAG(dag_id='dags_branch_decorator_example',
           start_date=datetime(2023,2,16),
-          schedule_interval='0 1 * * *'
+          schedule_interval='0 1 * * *',
+        catchup=False
 ) as dag:
 
     @task.branch(task_id='branching')
