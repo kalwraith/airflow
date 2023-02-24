@@ -16,11 +16,10 @@ with DAG(
         bash_command='echo "start!"',
     )
 
-    data_interal_end = '{{ data_interval_end }}'
     trigger_dag_task = TriggerDagRunOperator(
         task_id='trigger_dag_task',
         trigger_dag_id='dags_branch_decorator_example',
-        execution_date=pendulum.parse(data_interal_end).add(days=-2),
+        execution_date='{{ data_interval_end }}',
         reset_dag_run=True
     )
 
