@@ -18,7 +18,7 @@ with DAG(
 
     trigger_dag_task = TriggerDagRunOperator(
         trigger_dag_id='dags_branch_decorator_example',
-        execution_date=pendulum.parse('{{ ds }}').add(days=-1)
+        execution_date='{{ ds }}'
     )
 
     start_task >> trigger_dag_task
