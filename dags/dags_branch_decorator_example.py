@@ -15,6 +15,8 @@ with DAG(dag_id='dags_branch_decorator_example',
         select = random.randint(0, 3)
         return task_lst[select]
 
+    branching = random_branch()
+
     task_a = BashOperator(
     task_id='task_a',
     bash_command='echo "Selected Task A!"'
