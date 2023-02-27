@@ -13,7 +13,7 @@ with DAG(
         task_id='bash_task_1',
         bash_command="echo {{ ti }}; " +
                      "/opt/airflow/plugins/shell/select_fruit.sh Orange ; " +
-                     "{{ ti.xcom_push(key='Fruit_type', value='ORANGE' }}"
+                     "{{ ti.xcom_push(key='Fruit_type', value='ORANGE') }}"
 
     )
 
