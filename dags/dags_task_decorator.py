@@ -29,7 +29,7 @@ with DAG(
         print(kwargs.get('list_content') or [])
 
     task2 = python_function2(task1)
-    task3 = python_fucntion3(task2)
+    task3 = python_function3(task2)
 
     BashOperator(
         task_id='bash_task',
