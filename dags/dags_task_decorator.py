@@ -25,8 +25,8 @@ with DAG(
 
 
     @task
-    def python_function3(**kwargs):
-        print(kwargs.get('list_content') or [])
+    def python_function3(dict_v):
+        print(dict_v.get('list_content') or [])
 
     task2 = python_function2(task1)
     task3 = python_function3(task2)
