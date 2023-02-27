@@ -44,7 +44,6 @@ with DAG(
     python_task_3 = PythonOperator(
         task_id='python_task_3',
         python_callable=python_function3,
-        params=
         op_args={'python','operator'},
         op_kwargs={'name':'hjkim','address':'seoul'}
     )
