@@ -11,17 +11,18 @@ with DAG(
 
     @task
     def python_function1():
+        tmp_lst = []
         for i in range(0,5):
-            print(i)
+            tmp_lst.append(i)
+        return tmp_lst
 
     task1 = python_function1()
 
     @task
-    def python_function2():
-        for i in range(10,15):
-            print(i)
+    def python_function2(lst: list):
+        for x in lst:
+            print(x)
 
-    task2 = python_function2()
+    task2 = python_function2(task1)
 
-    task1 >> task2
-    
+    task2
