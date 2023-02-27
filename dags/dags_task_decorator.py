@@ -27,5 +27,5 @@ with DAG(
 
     BashOperator(
         task_id='bash_task',
-        bash_command='echo ' + task2['list_content']
+        bash_command='echo ' + str(task2['list_content'])
     )
