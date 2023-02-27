@@ -25,4 +25,3 @@ with DAG(
 
     task2 = python_function2(task1)
 
-    task2
