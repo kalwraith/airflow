@@ -16,11 +16,10 @@ def python_function2(**kwargs):
     print('address:' + address)
     print('age:' + age)
 
-def python_function3(ti, ds, *args, **kwargs):
-    print(ti)
-    print(ds)
+def python_function3(*args, **kwargs):
     print(args)
-    print(kwargs)
+    print('ti:' + str(kwargs['ti']))
+    print('dag_run:' + str(kwargs['dag_run']))
 
 
 with DAG(
@@ -45,6 +44,7 @@ with DAG(
     python_task_3 = PythonOperator(
         task_id='python_task_3',
         python_callable=python_function3,
+        params=
         op_args={'python','operator'},
         op_kwargs={'name':'hjkim','address':'seoul'}
     )
