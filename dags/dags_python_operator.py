@@ -9,9 +9,9 @@ def python_function1(*args):
 
 
 def python_function2(**kwargs):
-    name = kwargs.get('name') or {}
-    address = kwargs.get('address') or {}
-    age = kwargs.get('age') or {}
+    name = kwargs.get('name') or ''
+    address = kwargs.get('address') or ''
+    age = kwargs.get('age') or ''
     print('name:' + name)
     print('address:' + address)
     print('age:' + age)
@@ -21,7 +21,7 @@ def python_function3(ti, ds, *args, **kwargs):
     print(ds)
     print(args)
     print(kwargs)
-    
+
 
 with DAG(
     dag_id='dags_python_operator',
