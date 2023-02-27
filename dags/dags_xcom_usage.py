@@ -1,0 +1,22 @@
+from airflow import DAG
+from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
+import pendulum
+
+with DAG(
+    dag_id='dags_xcom_usage',
+    start_date=pendulum.datetime(2023,2,1,tz='Asia/Seoul'),
+    schedule=None,
+    catchup=False
+) as dag:
+    bash_task_1 = BashOperator(
+        task_id='bash_task_1',
+        bash_command='/opt/airflow/plugins/select_fruite.sh Orange',
+    )
+
+    bash_task_2 = BashOperator(
+        task_id='bash_task_2',
+        bash_command="echo I recevied {{ ti.xcom_pull(task_ids='bash_task_1', key='return_value') }}"
+    )
+
+    bash_task_1 >> bash_task_2
