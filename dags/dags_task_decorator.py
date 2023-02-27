@@ -1,5 +1,6 @@
 from airflow import DAG
 from airflow.decorators import task
+from airflow.operators.bash import BashOperator
 import pendulum
 
 with DAG(
@@ -20,8 +21,11 @@ with DAG(
 
     @task
     def python_function2(lst: list):
-        for x in lst:
-            print(x)
+        return {'list_content':[i + 100 for i in lst]}
 
     task2 = python_function2(task1)
 
+    BashOperator(
+        task_id='bash_task',
+        bash_command='echo ' + task2[list_content]
+    )
