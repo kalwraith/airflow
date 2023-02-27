@@ -23,7 +23,13 @@ with DAG(
     def python_function2(lst: list):
         return {'list_content':[i + 100 for i in lst]}
 
+
+    @task
+    def python_function3(**kwargs):
+        print(kwargs.get('list_content') or [])
+
     task2 = python_function2(task1)
+    task3 = python_fucntion3(task2)
 
     BashOperator(
         task_id='bash_task',
