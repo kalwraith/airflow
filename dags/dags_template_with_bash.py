@@ -16,8 +16,8 @@ with DAG(
 
     task_2 = BashOperator(
         task_id='task_2',
-        bash_command='echo "You can calculate +7 day using macro: {{ macros.timedelta(days=7) }}" && '
-                     'echo "You can calculate -3 day using macro: {{ macros.timedelta(days=-3) }}" && '
+        bash_command='echo "You can calculate +7 day using macro: {{ data_interval_end + macros.timedelta(days=7) }}" && '
+                     'echo "You can calculate -3 day using macro: {{ data_interval_end + macros.timedelta(days=-3) }}" && '
                      'echo "Or you can make any datetime: {{ macros.datetime(2022,2,1) }}" '
 
     )
