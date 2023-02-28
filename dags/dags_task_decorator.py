@@ -19,7 +19,7 @@ with DAG(
 
     task1 = python_function1()
 
-    @task
+    @task(task_id='python_task_2')
     def python_function2(lst: list):
         return {'list_content':[i + 100 for i in lst]}
 
@@ -28,8 +28,8 @@ with DAG(
     def python_function3(dict_v):
         print(dict_v.get('list_content') or [])
 
-    task2 = python_function2(task1)
-    task3 = python_function3(task2)
+    python_task_2 = python_function2(task1)
+    task3 = python_function3(python_task_2)
 
     BashOperator(
         task_id='bash_task',
