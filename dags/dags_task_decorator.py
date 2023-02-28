@@ -33,5 +33,7 @@ with DAG(
 
     BashOperator(
         task_id='bash_task',
-        bash_command="echo {{ ti.xcom_pull(task_ids='python_function2', key='return_value') }}"
+        bash_command="echo {{ ti.xcom_pull(task_ids='python_task_2', key='return_value') }}"
     )
+
+
