@@ -14,12 +14,4 @@ with DAG(
         bash_command='echo "We ran $NEXT_DT and task_instance is {{ ti }}"'
     )
 
-    task_2 = BashOperator(
-        task_id='task_2',
-        bash_command='echo "You can calculate +7 day using macro: {{ data_interval_end + macros.timedelta(days=7) }}" && '
-                     'echo "You can calculate -3 day using macro: {{ data_interval_end + macros.timedelta(days=-3) }}" && '
-                     'echo "Or you can make any datetime: {{ macros.datetime(2022,2,1) }}" '
-
-    )
-
-    task_1 >> task_2
+    task_1
