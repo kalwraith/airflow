@@ -21,8 +21,8 @@ with DAG(
     # 전월 1일 부터 말일까지 가져오기
     task_1 = PythonOperator(
         task_id='task_1',
-        templates_dict={'start_date':'{{ data_interval_end + macros.dateutil.relativedelta.relativedelta(months=-1, day=1) }}',
-                        'end_date': '{{ data_interval_end - macros.dateutil.relativedelta.relativedelta(day=1) + macros.dateutil.relativedelta.relativedelta(days=-1)}}'
+        templates_dict={'start_date':'{{ data_interval_end + macros.dateutil.relativedelta.relativedelta(months=-1, day=1) | ds }}',
+                        'end_date': '{{ data_interval_end - macros.dateutil.relativedelta.relativedelta(day=1) + macros.dateutil.relativedelta.relativedelta(days=-1) | ds }}'
                         },
         python_callable=function_for_prev_month
     )
