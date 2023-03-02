@@ -10,6 +10,7 @@ with DAG(
 ) as dag:
 
     def function_for_prev_month(**kwargs):
+        print(kwargs)
         start_date = kwargs.get('start_date') or 'start_date없음'
         end_date = kwargs.get('end_date') or 'end_date없음'
         print(f'기간 처리:{start_date} ~ {end_date}')
