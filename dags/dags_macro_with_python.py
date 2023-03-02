@@ -9,9 +9,12 @@ with DAG(
     catchup=False
 ) as dag:
 
-    def function_for_prev_month(start_date, end_date):
+    def function_for_prev_month(**kwargs):
+        start_date = kwargs.get('start_date') or 'start_date없음'
+        end_date = kwargs.get('end_date') or 'end_date없음'
         print(f'기간 처리:{start_date} ~ {end_date}')
 
+    # 전월 1일 부터 말일까지 가져오기
     task_1 = PythonOperator(
         task_id='task_1',
         templates_dict={'start_date':'{{ data_interval_end + macros.dateutil.relativedelta.relativedelta(months=-1, day=1) }}',
