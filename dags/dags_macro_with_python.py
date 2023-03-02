@@ -14,7 +14,7 @@ with DAG(
         if template_dict:
             start_date = template_dict.get('start_date') or 'start_date없음'
             end_date = template_dict.get('end_date') or 'end_date없음'
-            print(f'기간 처리:{start_date} ~ {end_date}')
+            print(f'기간 처리:{start_date} ~ {end_date} 작업을 시작합니다')
         else:
             print('templates_dict 파라미터가 없습니다')
 
