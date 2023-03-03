@@ -1,16 +1,24 @@
 # Package Import
 from airflow import DAG
 from airflow.operators.bash import BashOperator
-from datetime import datetime
+import pendulum
 
-dag = DAG(dag_id='dags_bash_operator',
-          start_date=datetime(2023,2,16),
-          schedule_interval='0 1 * * *')
+with DAG(
+    dag_id='dags_bash_operator_plugins',
+    start_date=datetime(2023,2,16),
+    catchup=False,
+    schedule='0 1 * * *'
+) as dag:
 
-t1 = BashOperator(
-    task_id='bash_task1',
-    bash_command='/opt/airflow/plugins/shell/select_fruit.sh Orange',
-    dag=dag
-)
+    t1 = BashOperator(
+        task_id='bash_task1',
+        bash_command='echo who_am_i',
+    )
 
-t1
+    t2 = BashOperator(
+        task_id='bash_task2',
+        bash_command='echo $HOSTNAME',
+    )
+
+    t1 >> t2
+    
