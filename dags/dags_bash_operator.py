@@ -5,7 +5,7 @@ import pendulum
 
 with DAG(
     dag_id='dags_bash_operator_plugins',
-    start_date=datetime(2023,2,16),
+    start_date=pendulum.datetime(2023,2,16, tz='Asia/Seoul'),
     catchup=False,
     schedule='0 1 * * *'
 ) as dag:
@@ -21,4 +21,3 @@ with DAG(
     )
 
     t1 >> t2
-    
