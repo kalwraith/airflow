@@ -4,7 +4,7 @@ from airflow.operators.bash import BashOperator
 import pendulum
 
 with DAG(
-    dag_id='dags_bash_operator_plugins',
+    dag_id='dags_bash_operator',
     start_date=pendulum.datetime(2023,2,16, tz='Asia/Seoul'),
     catchup=False,
     schedule='0 1 * * *'
