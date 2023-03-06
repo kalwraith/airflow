@@ -10,14 +10,14 @@ with DAG(
     schedule='0 1 * * *'
 ) as dag:
 
-    t1 = BashOperator(
-        task_id='bash_task1',
+    bash_task_1 = BashOperator(
+        task_id='bash_task_1',
         bash_command='echo who_am_i',
     )
 
-    t2 = BashOperator(
-        task_id='bash_task2',
+    bash_task_2 = BashOperator(
+        task_id='bash_task_2',
         bash_command='echo $HOSTNAME',
     )
 
-    t1 >> t2
+    bash_task_1 >> bash_task_2

@@ -78,9 +78,57 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "943e55b00c0c7c4f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "02.Airflow설치/2-7.Airflow library 설치.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "fe24a88aff7b75aa",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "03.Bash operator/3-1.Bash operator DAG 만들기 & DAG디렉토리 셋팅.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "d6c919d9c39c47d0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "03.Bash operator/3-1.Bash operator DAG 만들기 & DAG디렉토리 셋팅.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "678b4d8a16415269",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "03.Bash operator/3-3.Bash Operator & 외부 쉘파일 수행하기.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 6
       }
     ],
     "direction": "vertical"
@@ -146,7 +194,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "02.Airflow설치/2-6.Github 만들기.md",
+                "file": "03.Bash operator/3-3.Bash Operator & 외부 쉘파일 수행하기.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -163,7 +211,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "02.Airflow설치/2-6.Github 만들기.md",
+                "file": "03.Bash operator/3-3.Bash Operator & 외부 쉘파일 수행하기.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -186,7 +234,8 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "02.Airflow설치/2-6.Github 만들기.md"
+                "file": "03.Bash operator/3-3.Bash Operator & 외부 쉘파일 수행하기.md"
+
               }
             }
           }
@@ -207,20 +256,22 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "86f9fa061c3e5a52",
+  "active": "678b4d8a16415269",
   "lastOpenFiles": [
-    "02.Airflow설치/2-5.VScode 설치.md",
-    "02.Airflow설치/2-6.Github 만들기.md",
+    "03.Bash operator/3-1.Bash operator DAG 만들기 & DAG디렉토리 셋팅.md",
+    "03.Bash operator/3-3.Bash Operator & 외부 쉘파일 수행하기.md",
+    "03.Bash operator/3-2.Cron 스케줄.md",
     "02.Airflow설치/2-2.도커와 Airflow 설치.md",
-    "02.Airflow설치/2-4.파이썬 인터프리터 설치.md",
+    "02.Airflow설치/2-4 파이썬 인터프리터 설치.md",
+    "02.Airflow설치/2-7.Airflow library 설치.md",
+    "05.Template Variable/5-2.Bash Operator에서 Jinja 템플릿 사용하기.md",
+    "05.Template Variable/5-1.Template Variable.md",
     "Untitled.md",
-    "Untitled",
+    "03.Bash operator",
     "01.Airflow소개/Airflow 개념 소개.md",
     "Untitled.canvas",
     "2023-03-03.md",
-    "05.Template Variable/5-1.Template Variable.md",
     "2023-03-01.md",
-    "05.Template Variable/5-2.Bash Operator에서 Jinja 템플릿 사용하기.md",
     "03.Bash operator",
     "05.Template Variable",
     "02.Airflow설치/2-1.WSL설치.md",

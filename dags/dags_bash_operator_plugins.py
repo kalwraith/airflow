@@ -11,9 +11,14 @@ with DAG(
     schedule='0 1 * * *'
 ) as dag:
 
-    t1 = BashOperator(
-        task_id='bash_task1',
+    bash_task_1 = BashOperator(
+        task_id='bash_task_1',
         bash_command='/opt/airflow/plugins/shell/select_fruit.sh Orange'
     )
+
+    bash_task_2 = BashOperator(
+        task_id='bash_task_2',
+        bash_command='/opt/airflow/plugins/shell/select_fruit.sh Mango'
+    )
     
-    t1
+    bash_task_1 >> bash_task_2
