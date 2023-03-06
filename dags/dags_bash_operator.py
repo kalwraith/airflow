@@ -7,17 +7,17 @@ with DAG(
     dag_id='dags_bash_operator',
     start_date=pendulum.datetime(2023,2,16, tz='Asia/Seoul'),
     catchup=False,
-    schedule='0 1 * * *'
+    schedule='0 1 * * * 2023'
 ) as dag:
 
-    t1 = BashOperator(
-        task_id='bash_task1',
+    bash_task_1 = BashOperator(
+        task_id='bash_task_1',
         bash_command='echo who_am_i',
     )
 
-    t2 = BashOperator(
-        task_id='bash_task2',
+    bash_task_2 = BashOperator(
+        task_id='bash_task_2',
         bash_command='echo $HOSTNAME',
     )
 
-    t1 >> t2
+    bash_task_1 >> bash_task_2
