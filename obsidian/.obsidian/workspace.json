@@ -42,9 +42,33 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "943e55b00c0c7c4f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "02.Airflow설치/2-7.Airflow library 설치.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "fe24a88aff7b75aa",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "03.Bash operator/3-1.Bash operator DAG 만들기 & DAG디렉토리 셋팅.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -110,7 +134,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "02.Airflow설치/2-4 파이썬 인터프리터 설치.md",
+                "file": "03.Bash operator/3-1.Bash operator DAG 만들기 & DAG디렉토리 셋팅.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +151,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "02.Airflow설치/2-4 파이썬 인터프리터 설치.md",
+                "file": "03.Bash operator/3-1.Bash operator DAG 만들기 & DAG디렉토리 셋팅.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +174,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "02.Airflow설치/2-4 파이썬 인터프리터 설치.md"
+                "file": "03.Bash operator/3-1.Bash operator DAG 만들기 & DAG디렉토리 셋팅.md"
               }
             }
           }
@@ -171,12 +195,14 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "e42adb880d9134aa",
+  "active": "fe24a88aff7b75aa",
   "lastOpenFiles": [
-    "02.Airflow설치/2-2.도커와 Airflow 설치.md",
+    "02.Airflow설치/2-7.Airflow library 설치.md",
+    "03.Bash operator/3-1.Bash operator DAG 만들기 & DAG디렉토리 셋팅.md",
+    "03.Bash operator",
     "02.Airflow설치/2-4 파이썬 인터프리터 설치.md",
+    "02.Airflow설치/2-2.도커와 Airflow 설치.md",
     "Untitled.md",
-    "Untitled",
     "01.Airflow소개/Airflow 개념 소개.md",
     "Untitled.canvas",
     "2023-03-03.md",
