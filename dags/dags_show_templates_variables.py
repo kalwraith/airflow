@@ -5,7 +5,7 @@ import pendulum
 
 with DAG(
         dag_id='dags_show_templates_variables',
-        start_date=datetime(2023,2,16),
+        start_date=pendulum.datetime(2023,2,16),
         schedule_interval='10 0 * * *',
         catchup=False) as dag:
 
