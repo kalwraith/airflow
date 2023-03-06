@@ -17,6 +17,7 @@ with DAG(
             echo "dag_run.logical_date | ds: {{ dag_run.logical_date | ds }}"; \
             echo "dag_run.logical_date | ds_nodash: {{ dag_run.logical_date | ds_nodash }}"; \
             echo "dag_run.logical_date | ts: {{ dag_run.logical_date | ts }}"; \
+            echo "ds: {{ ds }}"; \
             echo "ts: {{ ts }}"; \
             echo "ts_nodash_with_tz: {{ ts_nodash_with_tz }}"; \
             echo "ts_nodash: {{ ts_nodash }}"; \
