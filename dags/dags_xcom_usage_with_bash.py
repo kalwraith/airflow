@@ -11,7 +11,7 @@ with DAG(
     catchup=False
 ) as dag:
     fruit_list = ['Orange','Apple','Grape']
-    selected_fruit = fruit_list[randint(0,2)]
+    selected_fruit = fruit_list[random.randint(0,2)]
 
     bash_task_1 = BashOperator(
         task_id='bash_task_1',
