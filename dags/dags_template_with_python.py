@@ -15,7 +15,7 @@ with DAG(
         print(kwargs)
         print('ds:' + kwargs['ds'])
         print('ts:' + str(kwargs['ts']))
-        print('data_interval_start:' + kwargs['data_interval_start'])
-        print('data_interval_end:' + kwargs['data_interval_end'])
+        print('data_interval_start:' + str(kwargs['data_interval_start']))
+        print('data_interval_end:' + str(kwargs['data_interval_end']))
 
     python_template = python_function()
