@@ -43,8 +43,7 @@ with DAG(
         prev_month_day_first_str = prev_month_day_first.strftime('%Y-%m-%d')
         prev_month_day_last_str = prev_month_day_last.strftime('%Y-%m-%d')
 
-        print('prev_month_day_first_str:' + prev_month_day_first_str)
-        print('prev_month_day_last_str:' + prev_month_day_last_str)
+        print(f'기간 처리:{prev_month_day_first_str} ~ {prev_month_day_last_str} 작업을 시작합니다')
 
     task_direct_calc = get_datetime_calc()
 
