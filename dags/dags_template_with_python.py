@@ -1,4 +1,5 @@
 from airflow import DAG
+from airflow.decorators import task
 from airflow.operators.python import PythonOperator
 import pendulum
 
