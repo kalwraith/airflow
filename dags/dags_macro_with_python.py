@@ -35,16 +35,17 @@ with DAG(
     def get_datetime_calc(**kwargs):
         data_interval_start = kwargs['data_interval_start']
         data_interval_end = kwargs['data_interval_end']
-        data_interval_start = data_interval_start + relativedelta(months=-1, day=1)
-        data_interval_end = data_interval_end + relativedelta(day=1) + relativedelta(days=-1)
-        print('data_interval_start:' + str(data_interval_start))
-        print('data_interval_end:' + str(data_interval_end))
 
-        data_interval_start_str = data_interval_start.strftime('%Y-%m-%d')
-        data_interval_end_str = data_interval_end.strftime('%Y-%m-%d')
+        prev_month_day_first = data_interval_start + relativedelta(months=-1, day=1)
+        prev_month_day_last = data_interval_end + relativedelta(day=1) + relativedelta(days=-1)
+        print('prev_month_day_1:' + str(prev_month_day_first))
+        print('prev_month_day_last:' + str(prev_month_day_last))
 
-        print('data_interval_start_str:' + data_interval_start_str)
-        print('data_interval_end_str:' + data_interval_end_str)
+        prev_month_day_first_str = prev_month_day_first.strftime('%Y-%m-%d')
+        prev_month_day_last_str = prev_month_day_last.strftime('%Y-%m-%d')
+
+        print('prev_month_day_first_str:' + prev_month_day_first_str)
+        print('prev_month_day_last_str:' + prev_month_day_last_str)
 
     task_direct_calc = get_datetime_calc()
 
