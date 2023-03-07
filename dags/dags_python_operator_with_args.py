@@ -23,7 +23,7 @@ def python_function3(*args, **kwargs):
 
 
 with DAG(
-    dag_id='dags_python_operator',
+    dag_id='dags_python_operator_with_args',
     start_date=pendulum.datetime(2023,2,20, tz='Asia/Seoul'),
     schedule=None
 ) as dag:
