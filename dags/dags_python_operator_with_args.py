@@ -18,8 +18,7 @@ def python_function2(**kwargs):
 
 def python_function3(*args, **kwargs):
     print(args)
-    print('ti:' + str(kwargs['ti']))
-    print('dag_run:' + str(kwargs['dag_run']))
+    print(kwargs)
 
 
 with DAG(
