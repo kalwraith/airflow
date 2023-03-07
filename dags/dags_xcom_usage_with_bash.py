@@ -13,14 +13,13 @@ with DAG(
         task_id='bash_task_1',
         bash_command="echo '{{ ti }}' && " 
                      "/opt/airflow/plugins/shell/select_fruit.sh Orange " +
-                     "{{ ti.xcom_push(key='Fruit_type', value='ORANGE') }} && "
-                     "{{ ti.xcom_push(key='Fruit_type2', value=$(/opt/airflow/plugins/shell/select_fruit.sh Apple)) }} "
+                     "{{ ti.xcom_push(key='Fruit_type', value='ORANGE') }} "
 
     )
 
     bash_task_2 = BashOperator(
         task_id='bash_task_2',
-        bash_command="echo default return_value is: {{ ti.xcom_pull(task_ids='bash_task_1', key='return_value') }} && "
+        bash_command="echo return_value is: {{ ti.xcom_pull(task_ids='bash_task_1', key='return_value') }} && "
         "echo Value of Fruit_type is: {{ ti.xcom_pull(task_ids='bash_task_1', key='Fruit_type') }}"
     )
 
