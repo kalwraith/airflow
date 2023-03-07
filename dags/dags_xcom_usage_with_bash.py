@@ -9,11 +9,14 @@ with DAG(
     schedule=None,
     catchup=False
 ) as dag:
+    fruit_list = ['Orange','Apple','Grape']
+    selected_fruit = fruit_list[randint(0,2)]
+
     bash_task_1 = BashOperator(
         task_id='bash_task_1',
         bash_command="echo '{{ ti }}' && " 
-                     "/opt/airflow/plugins/shell/select_fruit.sh Orange " +
-                     "{{ ti.xcom_push(key='Fruit_type', value='ORANGE') }} "
+                     f"/opt/airflow/plugins/shell/select_fruit.sh {selected_fruit} " +
+                     f"{{{{ ti.xcom_push(key='Fruit_type', value='{selected_fruit}') }}}} "
 
     )
 
