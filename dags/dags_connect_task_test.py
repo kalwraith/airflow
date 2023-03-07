@@ -11,42 +11,34 @@ with DAG(
 ) as dag:
 
     t1 = EmptyOperator(
-        task_id='dummy_t1',
-        dag=empty_dag
+        task_id='t1',
     )
 
     t2 = EmptyOperator(
-        task_id='dummy_t2',
-        dag=empty_dag
+        task_id='t2',
     )
 
     t3 = EmptyOperator(
-        task_id='dummy_t3',
-        dag=empty_dag
+        task_id='t3',
     )
 
     t4 = EmptyOperator(
-        task_id='dummy_t4',
-        dag=empty_dag
+        task_id='t4',
     )
 
     t5 = EmptyOperator(
-        task_id='dummy_t5',
-        dag=empty_dag
+        task_id='t5',
     )
 
     t6 = EmptyOperator(
-        task_id='dummy_t6',
-        dag=empty_dag
+        task_id='t6',
     )
 
     t7 = EmptyOperator(
-        task_id='dummy_t7',
-        dag=empty_dag
+        task_id='t7',
     )
 
     t8 = EmptyOperator(
-        task_id='dummy_t8',
-        dag=empty_dag
+        task_id='t8',
     )
 
