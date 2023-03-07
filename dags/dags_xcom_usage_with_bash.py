@@ -19,7 +19,8 @@ with DAG(
 
     bash_task_2 = BashOperator(
         task_id='bash_task_2',
-        bash_command="echo I recevied {{ ti.xcom_pull(task_ids='bash_task_1', key='return_value') }}"
+        bash_command="echo default return_value is: {{ ti.xcom_pull(task_ids='bash_task_1', key='return_value') }} && "
+        "echo Value of Fruit_type is: {{ ti.xcom_pull(task_ids='bash_task_1', key='Fruit_type') }}"
     )
 
     bash_task_1 >> bash_task_2
