@@ -7,7 +7,7 @@ from airflow.providers.postgres.hooks.postgres import PostgresHook
 class Earthquakes():
     def __init__(self):
         self.data_len = -1
-        
+
     def _get_data(self, starttime, endtime):
         base_url = f'https://earthquake.usgs.gov/fdsnws/event/1/query?format=csv&starttime={starttime}&endtime={endtime}'
         headers = {'Content-Type': 'application/json',
@@ -28,14 +28,18 @@ class Earthquakes():
         #self.postgres_conn = Postgres(dbname='custom',user='hyunjinkim',passwd='hyunjinkim')
 
 
-    def del_data(self, starttime, endtime):
+    def del_data(self, **kwargs):
+        starttime = kwargs['data_interval_start']
+        endtime = kwargs['data_interval_end']
         self._set_postgres_conn()
         self.postgres_cur.execute(self._del_query(starttime, endtime))
         self.postgres_conn.commit()
 
 
-    def insrt_data(self, starttime, endtime):
+    def insrt_data(self, **kwargs):
         self._set_postgres_conn()
+        starttime = kwargs['data_interval_start']
+        endtime = kwargs['data_interval_end']
         earthquakes_pd = self._get_data(starttime, endtime)
         self.data_len = len(earthquakes_pd)
         self.postgres_cur.execute(self._insrt_query(earthquakes_pd))
@@ -49,7 +53,7 @@ class Earthquakes():
     def _insrt_query(self, data_pd):
         values = ''
         for num, row in data_pd.iterrows():
-            values += f"('{row['time']}',{row['depth']},{row['latitude']},{row['longitude']},{row['mag']}),\n"
-        values = values[:-2]        # 끝 부분 콤마와 줄넘김 제거
+            values += f"({row['depth']},{row['mag']},'{row['magType']}',{row['nst']},{row['gap']},{row['dmin']},{row['rms']},'{row['net']}','{row['id']}',{row['updated']},'{row['place']}','{row['type']}',{row['horizontalError']},{row['depthError']},{row['magError']},{row['magNst']},'{row['status']}','{row['locationSource']}',	'{row['magSource']}'),\n"
+            values = values[:-2]        # 끝 부분 콤마와 줄넘김 제거
 
         return f'''INSERT INTO earthquakes VALUES {values}'''
