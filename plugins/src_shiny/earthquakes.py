@@ -22,7 +22,7 @@ class Earthquakes():
 
 
     def _set_postgres_conn(self):
-        self.hook = PostgresHook(postgres_conn_id='conn-postgres-custom')
+        self.hook = PostgresHook(postgres_conn_id='conn-db-postgres-custom')
         self.postgres_conn = self.hook.get_conn()
         self.postgres_cur = self.postgres_conn.cursor()
         #self.postgres_conn = Postgres(dbname='custom',user='hyunjinkim',passwd='hyunjinkim')
