@@ -23,12 +23,7 @@ with DAG(
             echo "ts_nodash: {{ ts_nodash }}"; \
             echo "prev_data_interval_start_success | ds: {{ prev_data_interval_start_success | ds }}"; \
             echo "prev_data_interval_end_success | ds: {{ prev_data_interval_end_success | ds }}"; \
-            echo "prev_start_date_success | ds: {{ prev_start_date_success | ds }}"; \
-            echo "dag: {{ dag }}"; \
-            echo "task: {{ task }}"; \
-            echo "macros: {{ macros }}"; \
-            echo "task_instance: {{ task_instance }}";',
-        dag=dag
+            echo "prev_start_date_success | ds: {{ prev_start_date_success | ds }}"; '
     )
 
     show_template_variables
