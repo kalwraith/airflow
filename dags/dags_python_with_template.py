@@ -4,7 +4,7 @@ from airflow.operators.python import PythonOperator
 import pendulum
 
 with DAG(
-    dag_id='dags_template_with_python',
+    dag_id='dags_python_with_template',
     start_date=pendulum.datetime(2023,2,1, tz='Asia/Seoul'),
     schedule='0 1 * * *',
     catchup=False
