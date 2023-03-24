@@ -4,7 +4,7 @@ import pendulum
 import calendar
 
 with DAG(
-    dag_id='dags_bash_with_macro_exam1',
+    dag_id='dags_bash_with_macro_exam',
     start_date=pendulum.datetime(2023,3,1, tz='Asia/Seoul'),
     schedule='10 1 * * *',
     catchup=False
@@ -22,8 +22,9 @@ with DAG(
     exam_2 = BashOperator(
         task_id='exam_2',
         env={
-            'START_DATE': '{{ (data_interval_end + macros.dateutil.relativedelta.relativedelta(months=-1, day=1)) | ds }}',
-            'END_DATE': '{{ (data_interval_end + macros.dateutil.relativedelta.relativedelta(day=1) + macros.dateutil.relativedelta.relativedelta(days=-1) + macro.dateutil.relativedelta.relativedelta(weekday=calendar.SATURDAY)| ds }}'},
+            'START_DATE': '{{ (data_interval_end + macros.dateutil.relativedelta.relativedelta(months=-1, day=1) ) | ds }}',
+            'END_DATE': '{{ (data_interval_end + macros.dateutil.relativedelta.relativedelta(day=1) + macros.dateutil.relativedelta.relativedelta(days=-1) + macro.dateutil.relativedelta.relativedelta(weekday=calendar.SATURDAY) )| ds }}'
+        },
         bash_command='echo "START_DATE: $START_DATE" && '
                      'echo "ENDDATE: $END_DATE" '
 
