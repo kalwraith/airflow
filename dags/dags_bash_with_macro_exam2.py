@@ -13,10 +13,12 @@ with DAG(
     exam_2 = BashOperator(
         task_id='exam_2',
         env={'START_DATE':'{{ (data_interval_end + macros.dateutil.relativedelta.relativedelta(days=-19)) | ds }}',
-             'END_DATE': '{{ (data_interval_end + macros.dateutil.relativedelta.relativedelta(days=-14)) | ds }}'
+             'END_DATE': '{{ (data_interval_end + macros.dateutil.relativedelta.relativedelta(days=-14)) | ds }}',
+             'START_TS': '{{ data_interval_end + macros.dateutil.relativedelta.relativedelta(days=-1)}}'
         },
         bash_command='echo "START_DATE: $START_DATE" && '
-                     'echo "END_DATE: $END_DATE" '
+                     'echo "END_DATE: $END_DATE" && '
+                     'echo "START_TS: $START_TS"'
 
     )
 
