@@ -12,9 +12,9 @@ with DAG(
 
     exam_1 = BashOperator(
         task_id='exam_1',
-        env={'START_DATE':'{{ data_interval_start.astimezone(macros.timedelta(hours=9)) | ds }}',
-             'END_DATE': '{{ (data_interval_end.astimezone(macros.timedelta(hours=9)) + macros.dateutil.relativedelta.relativedelta(days=-1)) | ds }}',
-             'END_TS': '{{ data_interval_end.astimezone(macros.timedelta(hours=9)) }}'
+        env={'START_DATE':'{{ data_interval_start + macros.dateutil.relativedelta.relativedelta(days=9) | ds }}',
+             'END_DATE': '{{ (data_interval_end + macros.dateutil.relativedelta.relativedelta(days=9) + macros.dateutil.relativedelta.relativedelta(days=-1)) | ds }}',
+             'END_TS': '{{ data_interval_end + macros.dateutil.relativedelta.relativedelta(days=9) }}'
         },
         bash_command='echo "START_DATE: $START_DATE" && '
                      'echo "END_DATE: $END_DATE" && '
