@@ -12,7 +12,7 @@ with DAG(
 
     exam_1 = BashOperator(
         task_id='exam_1',
-        env={'START_DATE':'{{ (data_interval_start + macros.dateutil.relativedelta.relativedelta(hours=9)) | ds }}',
+        env={'START_DATE':"{{ (data_interval_start.in_timezone('Asia/Seoul')) | ds }}",
              'END_DATE': '{{ (data_interval_end + macros.dateutil.relativedelta.relativedelta(hours=9) + macros.dateutil.relativedelta.relativedelta(days=-1)) | ds }}',
              'END_TS': '{{ data_interval_end + macros.dateutil.relativedelta.relativedelta(hours=9) }}'
         },
