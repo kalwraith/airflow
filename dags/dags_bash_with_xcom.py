@@ -18,7 +18,8 @@ with DAG(
 
     bash_pull = BashOperator(
         task_id='bash_pull',
-        env={'FIRST_VALUE': "{{ ti.xcom_pull(key='bash_push') }}",
-             'SECOND_VALUE': "{{ ti.xcom_pull(key='return_value', task_ids='bash_push') }}"},
-        bash_command="echo $FIRST_VALUE && echo $SECOND_VALUE "
+        env={'FIRST_VALUE': "{{ ti.xcom_pull(key='bash_pushed') }}",
+             'SECOND_VALUE': "{{ ti.xcom_pull(task_ids='bash_push') }}"},
+        bash_command="echo $FIRST_VALUE && echo $SECOND_VALUE ",
+        do_xcom_push=False
     )
