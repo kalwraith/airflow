@@ -10,8 +10,8 @@ with DAG(
 ) as dag:
     bash_push = BashOperator(
         task_id='bash_push',
-        bash_command="{{ ti.xcom_push(key='bash_pushed',value='first_bash_message') }} && "
-                     "echo second_bash_message"
+        bash_command="echo XCOM_PUSHED {{ ti.xcom_push(key='bash_pushed',value='first_bash_message') }} && "
+                     "echo $PUSHED_MSG"
     )
 
     bash_pull = BashOperator(
