@@ -9,14 +9,15 @@ with DAG(
     schedule='2 0 * * *',
     catchup=False,
     params={
-        'data':[1,2,3],
-        'option_num':100
+        'ymd_1':'{{ (data_interval_end.in_timezone("Asia/Seoul") + macros.dateutil.relativedelta.relativedelta(days=-1)) | ds }}',
+        'ymd_2':'{{ (data_interval_end.in_timezone("Asia/Seoul") + macros.dateutil.relativedelta.relativedelta(days=-2)) | ds }}',
+        'ymd_3':'{{ (data_interval_end.in_timezone("Asia/Seoul") + macros.dateutil.relativedelta.relativedelta(days=-3)) | ds }}'
     }
 ) as dag:
 
     @task(task_id='task_sample')
     def task_sample(**kwargs):
-        dag_run = kwargs['dag_run']
-        print(dag_run.conf)
+        ymd_1 = kwargs['params']['ymd_1']
+        print(ymd_1)
 
     task_sample()
