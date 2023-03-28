@@ -7,7 +7,11 @@ with DAG(
     dag_id='dags_python_with_conf',
     start_date=pendulum.datetime(2023,3,20, tz='Asia/Seoul'),
     schedule='2 0 * * *',
-    catchup=False
+    catchup=False,
+    params={
+        'data':[1,2,3],
+        'option_num':100
+    }
 ) as dag:
 
     @task(task_id='task_sample')
