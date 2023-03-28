@@ -27,4 +27,21 @@ with DAG(
         bash_command='echo $STATUS && echo $DATA && echo $OPTIONS_CNT'
     )
 
+    bash_push = BashOperator(
+        task_id='bash_push',
+        bash_command='echo PUSH_START && '
+                     '{{ti.xcom_push(key="bash_pushed",value="200")}} && '
+                     'echo PUSH_COMPLETE'
+    )
+
+    @task(task_id='python_pull')
+    def pulling(**kwargs):
+        ti = kwargs['ti']
+        status_value = ti.xcom_pull(key='bash_pushed')
+        return_value = ti.xcom_pull(task_ids='bash_push')
+        print(status_value)
+        print(return_value)
+
     push_xcom() >> bash_pull
+
+    bash_push >> pulling()
