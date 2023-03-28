@@ -1,7 +1,6 @@
 from airflow import DAG
 from airflow.operators.bash import BashOperator
 import pendulum
-import calendar
 
 with DAG(
     dag_id='dags_bash_with_macro_exam1',
