@@ -21,3 +21,5 @@ with DAG(
         bash_command="echo {{ ti.xcom_pull(key='bash_pushed') }} && echo {{ ti.xcom_pull(key='return_value', task_ids='bash_push') }} ",
         do_xcom_push=False
     )
+
+    bash_push >> bash_pull
