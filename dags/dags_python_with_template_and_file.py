@@ -10,8 +10,9 @@ with DAG(
     catchup=False
 ) as dag:
     def run_sql(**kwargs):
-        sql = kwargs['sql_file']
-        with open(sql) as sql:
+        sql_file = kwargs['sql_file']
+        with open(sql_file) as sql_file_io:
+            sql = '\n'.join(sql_file_io.readlines())
             print(sql)
 
     python_task1 = PythonOperator(
