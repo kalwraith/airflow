@@ -15,7 +15,7 @@ with DAG(
 ) as dag:
     @task(task_id='python_task')
     def python_func(**kwargs):
-        import pprint
-        print(kwargs)
+        from pprint import pprint
+        pprint(kwargs)
 
     python_func()
