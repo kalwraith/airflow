@@ -18,7 +18,7 @@ with DAG(
         task_id='python_task1',
         python_callable=run_sql,
         op_kwargs={'sql_file':'/opt/airflow/files/sqls/select_template.sql'},
-        templates_exts=['.sql']
+        # templates_exts=['.sql']
     )
 
     python_task1
