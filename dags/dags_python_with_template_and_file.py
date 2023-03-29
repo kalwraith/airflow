@@ -11,7 +11,8 @@ with DAG(
 ) as dag:
     def run_sql(**kwargs):
         sql = kwargs['sql_file']
-        print(sql)
+        with open(sql) as sql:
+            print(sql)
 
     python_task1 = PythonOperator(
         task_id='python_task1',
