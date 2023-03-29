@@ -9,11 +9,16 @@ with DAG(
     schedule='0 1 * * *',
     catchup=False
 ) as dag:
-
-    @task(task_id='python_template', op_kwargs={'end_date':'{{ data_interval_end.in_timezone("Asia/Seoul") | ds}}' })
     def python_function(end_date, **kwargs):
         print(kwargs)
         print(end_date)
         print('data_interval_end:' + str(kwargs['data_interval_end']))
 
-    python_template = python_function()
+
+    task_1 = PythonOperator(
+        task_id='task_1',
+        op_kwargs={'end_date':'{{ data_interval_end.in_timezone("Asia/Seoul") | ds}}' },
+        python_callable=python_function
+    )
+
+    task_1
