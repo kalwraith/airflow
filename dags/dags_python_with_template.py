@@ -10,12 +10,10 @@ with DAG(
     catchup=False
 ) as dag:
 
-    @task(task_id='python_template')
-    def python_function(**kwargs):
+    @task(task_id='python_template', op_kwargs={'end_date':'{{ data_interval_end.in_timezone("Asia/Seoul") | ds}}' }
+    def python_function(end_date, **kwargs):
         print(kwargs)
-        print('ds:' + kwargs['ds'])
-        print('ts:' + str(kwargs['ts']))
-        print('data_interval_start:' + str(kwargs['data_interval_start']))
+        print(end_date)
         print('data_interval_end:' + str(kwargs['data_interval_end']))
 
     python_template = python_function()
