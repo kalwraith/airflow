@@ -30,7 +30,7 @@ with DAG(
     python_task_1 = PythonOperator(
         task_id='python_task_1',
         python_callable=python_function1,
-        op_args=['We','are','studying','airflow', '{{ data_interaval_start }}']
+        op_args=['We','are','studying','airflow', '{{ data_interval_start }}']
 
     )
 
