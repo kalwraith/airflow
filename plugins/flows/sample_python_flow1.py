@@ -6,7 +6,7 @@ import pendulum
 
 def flow():
 
-    def test()
+    def test():
         print('flow1 test')
 
     t1 = PythonOperator(
