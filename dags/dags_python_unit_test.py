@@ -11,7 +11,7 @@ with DAG(
     schedule='0 1 * * *',
     catchup=False
 ) as dag:
-    t1 = sample_python_flow1.flow()
-    t2 = sample_python_flow2.flow()
+    task_sample_python_flow1 = sample_python_flow1.flow()
+    task_sample_python_flow2 = sample_python_flow2.flow()
 
-    t1 >> t2
+    task_sample_python_flow1 >> task_sample_python_flow2
