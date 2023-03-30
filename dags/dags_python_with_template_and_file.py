@@ -10,7 +10,7 @@ with DAG(
     catchup=False
 ) as dag:
     def run_sql(**kwargs):
-        sql_file = kwargs['templates_dict']['sql_file']
+        sql_file = kwargs['sql_file']
         print(sql_file)
         with open(sql_file) as sql_file_io:
             sql = ''.join(sql_file_io.readlines())
@@ -19,7 +19,7 @@ with DAG(
     python_task1 = PythonOperator(
         task_id='python_task1',
         python_callable=run_sql,
-        templates_dict={'sql_file':'/opt/airflow/files/sqls/select_template.sql'},
+        op_kwargs={'sql_file':'/opt/airflow/files/sqls/select_template.sql'},
         templates_exts=['.sql']
     )
 
