@@ -1,6 +1,8 @@
 from airflow.models.baseoperator import BaseOperator
 
 class MakeFinOperator(BaseOperator):
+    template_fields = ['path', 'file_name']
+
     def __init(self, path, file_name, **kwargs):
         super().__init__(**kwargs)
         self.path = path[1:] if path.startswith('/') else path
