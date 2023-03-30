@@ -1,6 +1,6 @@
 from operators.make_fin_operator import MakeFinOperator
-
 import pendulum
+from airflow import DAG
 
 with DAG(
     dag_id='dags_make_fin_test',
