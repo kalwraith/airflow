@@ -1,6 +1,7 @@
 from operators.custom_base_operator import CustomBaseOperator
 from pathlib import Path
 class MakeFinOperator(CustomBaseOperator):
+    template_fields = ('path','file_name')
 
     def __init__(self, path, file_name, **kwargs):
         super().__init__(**kwargs)

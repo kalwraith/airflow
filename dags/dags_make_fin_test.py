@@ -10,7 +10,7 @@ with DAG(
 ) as dag:
     fin_task = MakeFinOperator(
         task_id='fin_task',
-        path='l0/cm/##yyyy##/##MM##/##dd##}}',
+        path='l0/cm/{{params.flow1_table}}/##yyyy##/##MM##/##dd##',
         file_name='fin'
     )
 
