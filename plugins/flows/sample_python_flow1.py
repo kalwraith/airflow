@@ -6,6 +6,9 @@ import pendulum
 
 def flow():
 
+    def test()
+        print('flow1 test')
+
     t1 = PythonOperator(
         task_id='sample_python_flow1',
         python_callable=test
