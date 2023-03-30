@@ -16,7 +16,7 @@ def flow():
 
     fin_task = MakeFinOperator(
         task_id='sample_make_fin',
-        path='l0/cm/{{params.flow1_table }}/{{ data_interval_end.in_timezone("Asia/Seoul").year }}/{{ data_interval_end.in_timezone("Asia/Seoul").month }}/{{ data_interval_end.in_timezone("Asia/Seoul").day }}',
+        path='l0/cm/{{params.flow1_table }}/##yyyy##/##MM##/##dd##',
         file_name='fin'
     )
 
