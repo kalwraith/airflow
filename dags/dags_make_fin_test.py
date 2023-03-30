@@ -10,7 +10,7 @@ with DAG(
 ) as dag:
     fin_task = MakeFinOperator(
         task_id='fin_task',
-        path='l0/cm/{{ data_interval_end.in_timezone("Asia/Seoul").year }}/{{ data_interval_end.in_timezone("Asia/Seoul").month }}/{{ data_interval_end.in_timezone("Asia/Seoul").day }}',
+        path='l0/cm/##yyyy##/##MM##/##dd##}}',
         file_name='fin'
     )
 
