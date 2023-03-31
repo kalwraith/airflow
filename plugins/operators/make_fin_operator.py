@@ -5,8 +5,8 @@ class MakeFinOperator(CustomBaseOperator):
     template_fields = ('path','file_name')
 
     def __init__(self, path, file_name, **kwargs):
-        task_meta = kwargs.get('task_meta') or ''
-        if task_meta == '':
+        task_meta = kwargs.get('task_meta')
+        if task_meta:
             task_id = kwargs.get('task_id')
         else:
             task_id = get_task_id(task_meta=task_meta, task_nm='make_fin')
