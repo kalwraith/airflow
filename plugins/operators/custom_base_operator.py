@@ -28,4 +28,4 @@ class CustomBaseOperator(BaseOperator):
 
     def substitute_parameters(self, variable: str):
         from datetime import datetime
-        return substitute_parameters_with_context(datetime.now(), variable)
+        return substitute_parameters_with_context(self.data_interval_end, self.dag_id, variable)
