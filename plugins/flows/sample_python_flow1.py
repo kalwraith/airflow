@@ -4,6 +4,13 @@ from airflow.utils.task_group import TaskGroup
 from common import get_task_group_id
 
 def flow():
+    task_meta = {
+        'PROCESS_TYPE':'c',
+        'SRC_TGT_SYSETM':'hc',
+        'PROCESS_CODE':'',
+        'TGT_LAYER':'l0',
+        'TABLE_NAME':'tgt_table'
+    }
 
     task_group_id = get_task_group_id(task_meta)
     with TaskGroup(group_id=task_group_id) as tg:

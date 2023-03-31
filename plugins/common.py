@@ -178,10 +178,12 @@ def get_task_group_id(task_meta):
 
 def get_task_id(task_meta):
     process_type = task_meta.get('PROCESS_TYPE')
-    process_code = task_meta.get('PROCESS_CODE')
-    table_name = task_meta.get('TABLE_NAME')
     src_tgt_system = task_meta.get('SRC_TGT_SYSETM')
+    process_code = task_meta.get('PROCESS_CODE')
     tgt_layer = task_meta.get('TGT_LAYER')
+    table_name = task_meta.get('TABLE_NAME')
+
+
 
     ## task_group_id 에 대한 네이밍 룰 셋팅
     task_group_id = f'tg_{process_type}{src_tgt_system}_{process_code}{tgt_layer}_{table_name}'
