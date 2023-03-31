@@ -2,8 +2,10 @@ from airflow import DAG
 from datetime import datetime
 from airflow.operators.python import PythonOperator
 from operators.make_fin_operator import MakeFinOperator
+from airflow.decorators import task_group
 import pendulum
 
+@task_group
 def flow():
 
     def test():
@@ -16,9 +18,9 @@ def flow():
 
     fin_task = MakeFinOperator(
         task_id='sample_make_fin',
-        path='l0/cm/{{params.flow1_table }}/##yyyy##/##MM##/##dd##',
-        file_name='fin'
+        path='l0/cm/table_name/##yyyy##/##MM##/##dd##',
+        file_name='##yyyyMMdd|dd-1##.success'
     )
 
-    return t1 >> fin_task
+    t1 >> fin_task
 
