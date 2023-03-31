@@ -5,7 +5,7 @@ from operators.make_fin_operator import MakeFinOperator
 from airflow.decorators import task_group
 import pendulum
 
-@task_group
+@task_group(group_id='sample_task_group')
 def flow():
 
     def test():
