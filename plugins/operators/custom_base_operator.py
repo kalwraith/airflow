@@ -8,14 +8,14 @@ class CustomBaseOperator(BaseOperator):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         from pprint import pprint
-        LoggingMixin().log.info(kwargs)
+
         #self.data_interval_end = kwargs['data_interval_end']
 
     def execute(self, context):
         '''
         로깅 등 공통로직 처리
         '''
-
+        LoggingMixin().log.info(context['data_interval_end'])
         self._execute()
 
 
