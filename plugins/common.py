@@ -161,3 +161,29 @@ def substitute_parameters_with_context(data_interval_end, dag_id, text):
             m = p.search(text, m.end())
 
     return text
+
+
+def get_task_group_id(task_meta):
+    process_type = task_meta.get('PROCESS_TYPE')
+    process_code = task_meta.get('PROCESS_CODE')
+    table_name = task_meta.get('TABLE_NAME')
+    src_tgt_system = task_meta.get('SRC_TGT_SYSETM')
+    tgt_layer = task_meta.get('TGT_LAYER')
+
+    ## task_group_id 에 대한 네이밍 룰 셋팅
+    task_group_id = f'tg_{process_type}{src_tgt_system}_{process_code}{tgt_layer}_{table_name}'
+
+    return task_group_id
+
+
+def get_task_id(task_meta):
+    process_type = task_meta.get('PROCESS_TYPE')
+    process_code = task_meta.get('PROCESS_CODE')
+    table_name = task_meta.get('TABLE_NAME')
+    src_tgt_system = task_meta.get('SRC_TGT_SYSETM')
+    tgt_layer = task_meta.get('TGT_LAYER')
+
+    ## task_group_id 에 대한 네이밍 룰 셋팅
+    task_group_id = f'tg_{process_type}{src_tgt_system}_{process_code}{tgt_layer}_{table_name}'
+
+    return task_group_id

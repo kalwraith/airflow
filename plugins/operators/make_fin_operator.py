@@ -5,8 +5,10 @@ class MakeFinOperator(CustomBaseOperator):
 
     def __init__(self, path, file_name, **kwargs):
         super().__init__(**kwargs)
+        self.task_id = self.get_task_id(operator_name='make_fin')
         self.path = path[1:] if path.startswith('/') else path
         self.file_name = file_name
+
 
     def _execute(self):
         self.path = self.substitute_parameters(self.path)
