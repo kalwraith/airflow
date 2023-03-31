@@ -28,6 +28,12 @@ def flow():
             file_name='##yyyyMMdd|dd-1##.success'
         )
 
-        t1 >> fin_task
+        fin_task2 = MakeFinOperator(
+            task_id='direct_inserted_task_name_fin,
+            path='l0/cm/table_name/##yyyy##/##MM##/##dd##',
+            file_name='##yyyyMMdd##.success'
+        )
+
+        t1 >> fin_task >> fin_task2
 
     return tg
