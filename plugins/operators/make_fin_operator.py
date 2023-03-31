@@ -4,8 +4,8 @@ class MakeFinOperator(CustomBaseOperator):
     template_fields = ('path','file_name')
 
     def __init__(self, path, file_name, **kwargs):
-        super().__init__(**kwargs)
-        self.task_id = self.get_task_id(operator_name='make_fin')
+        task_id = self.get_task_id(operator_name='make_fin')
+        super().__init__(task_id, **kwargs)
         self.path = path[1:] if path.startswith('/') else path
         self.file_name = file_name
 

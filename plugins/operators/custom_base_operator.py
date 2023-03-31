@@ -6,7 +6,6 @@ class CustomBaseOperator(BaseOperator):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.task_meta = kwargs.get('task_meta') or {}
-        self.task_id = 'sdf'
 
 
     def execute(self, context):
