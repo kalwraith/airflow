@@ -36,4 +36,4 @@ class CustomBaseOperator(BaseOperator):
         tgt_layer = self.task_meta.get('TGT_LAYER')
 
         ## task_group_id 에 대한 네이밍 룰 셋팅
-        self.task_id = f'task_{process_type}{src_tgt_system}_{process_code}{tgt_layer}_{table_name}_{operator_type}'
+        self.task_id = f'task_{process_type}{src_tgt_system}_{process_code}{tgt_layer}_{table_name}_{operator_name}'
