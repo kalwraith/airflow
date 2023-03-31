@@ -15,7 +15,7 @@ class CustomBaseOperator(BaseOperator):
         '''
         로깅 등 공통로직 처리
         '''
-        LoggingMixin().log.info(self.dag_id)
+        LoggingMixin().log.info(context)
         self.data_interval_end = context['data_interval_end']
         self._execute()
 
