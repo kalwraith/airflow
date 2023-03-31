@@ -98,7 +98,7 @@ def calc_relative_datetime(
     return time_obj
 
 
-def substitute_parameters_with_context(data_interval_end, text):
+def substitute_parameters_with_context(data_interval_end, dag_id, text):
     """
     context 필요한 string 치환 처리.
 
@@ -118,6 +118,8 @@ def substitute_parameters_with_context(data_interval_end, text):
     if not text:
         self.log.info(f"no input")
         return text
+
+    text = text.replace("##dag_id##",dag_id)
 
     fmt_map = {
         "yyyy": "%Y", "MM": "%m", "dd": "%d", "HH": "%H", "mm": "%M", "ss": "%S",
