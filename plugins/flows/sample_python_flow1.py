@@ -3,7 +3,6 @@ from operators.make_fin_operator import MakeFinOperator
 from airflow.utils.task_group import TaskGroup
 from common import get_task_group_id
 
-@task_group(group_id='sample_task_group')
 def flow():
 
     task_group_id = get_task_group_id(task_meta)
