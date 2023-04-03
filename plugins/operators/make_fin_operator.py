@@ -7,11 +7,10 @@ class MakeFinOperator(CustomBaseOperator):
     def __init__(self, path, file_name, **kwargs):
         task_meta = kwargs.get('task_meta')
         if task_meta:
-            task_id = get_task_id(task_meta=task_meta, task_nm='make_fin')
+            kwargs['task_id'] = get_task_id(task_meta=task_meta, task_nm='make_fin')
             del kwargs['task_meta']
-        else:
-            task_id = kwargs.get('task_id')
-        super().__init__(task_id=task_id, **kwargs)
+
+        super().__init__(**kwargs)
         self.path = path[1:] if path.startswith('/') else path
         self.file_name = file_name
 
