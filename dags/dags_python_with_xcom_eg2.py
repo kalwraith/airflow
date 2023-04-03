@@ -16,17 +16,17 @@ with DAG(
         return transaction_value
 
 
-    @task(task_id='xcom_pull_by_return')
+    @task(task_id='xcom_pull_return_by_serial')
     def xcom_pull_return_by_serial(status, **kwargs):
         print(status)
 
 
-    @task(task_id='xcom_pull_by_return')
+    @task(task_id='xcom_pull_return_by_method')
     def xcom_pull_return_by_method(**kwargs):
         ti = kwargs['ti']
         pull_value = ti.xcom_pull(key='return_value')
         print(pull_value)
 
     xcom_push = xcom_push_by_return()
-    xcom_pull_by_return(xcom_push)
+    xcom_pull_return_by_serial(xcom_push)
     xcom_push >> xcom_pull_return_by_method()
