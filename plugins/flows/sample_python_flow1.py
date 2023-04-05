@@ -7,9 +7,10 @@ def flow():
     task_meta = {
         'PROCESS_TYPE':'c',
         'SRC_TGT_SYSETM':'hc',
-        'PROCESS_CODE':'',
+        'PROCESS_DETAIL':'d',
         'TGT_LAYER':'l0',
-        'TABLE_NAME':'tgt_table'
+        'TABLE_NAME':'tgt_table',
+        'NUM':'001'
     }
 
     task_group_id = get_task_group_id(task_meta)

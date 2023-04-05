@@ -7,7 +7,7 @@ class MakeFinOperator(CustomBaseOperator):
     def __init__(self, path, file_name, **kwargs):
         task_meta = kwargs.get('task_meta')
         if task_meta:
-            kwargs['task_id'] = get_task_id(task_meta=task_meta, task_nm='make_fin')
+            kwargs['task_id'] = get_task_id(task_meta=task_meta, op_nm='make_fin')
             del kwargs['task_meta']
 
         super().__init__(**kwargs)

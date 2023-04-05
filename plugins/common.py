@@ -167,16 +167,17 @@ def substitute_parameters_with_context(data_interval_end, dag_id, text):
 def get_base_id(task_meta):
     process_type = task_meta.get('PROCESS_TYPE')
     src_tgt_system = task_meta.get('SRC_TGT_SYSETM')
-    process_code = task_meta.get('PROCESS_CODE')
+    process_detail = task_meta.get('PROCESS_DETAIL')
     tgt_layer = task_meta.get('TGT_LAYER')
     table_name = task_meta.get('TABLE_NAME')
+    num = task_meta.get('NUM')
 
-    return f'{process_type}{src_tgt_system}_{process_code}{tgt_layer}_{table_name}'
+    return f'{process_type}{src_tgt_system}_{process_detail}{tgt_layer}_{table_name}_{num}'
 
 
 def get_task_group_id(task_meta):
     return f'tg_{get_base_id(task_meta)}'
 
 
-def get_task_id(task_meta, task_nm):
-    return f'task_{get_base_id(task_meta)}_{task_nm}'
+def get_task_id(task_meta, op_nm):
+    return f't_{get_base_id(task_meta)}_{op_nm}'
