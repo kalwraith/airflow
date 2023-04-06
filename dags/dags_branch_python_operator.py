@@ -2,9 +2,11 @@ from airflow import DAG
 from datetime import datetime
 from airflow.operators.python import PythonOperator
 from airflow.operators.python import BranchPythonOperator
-from random import choice
+
 
 def select_random():
+    import random
+
     item_lst = ['A','B','C']
     selected_item = random.choice(item_lst)
     if selected_item == 'A':
