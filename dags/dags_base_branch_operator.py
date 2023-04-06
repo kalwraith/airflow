@@ -5,37 +5,48 @@ from airflow.operators.branch import BaseBranchOperator
 from airflow.operators.empty import EmptyOperator
 from datetime import datetime
 
-dag = DAG(dag_id='dags_base_branch_operator',
-          start_date=datetime(2023,2,20),
-          schedule_interval='*/5 * * * *',
-          catchup=False
-          )
+with DAG(
+    dag_id='dags_bash_python_with_xcom',
+    start_date=pendulum.datetime(2023,3,20, tz='Asia/Seoul'),
+    schedule='2 0 * * *',
+    catchup=False
+) as dag:
+    def common_func(**kwargs):
+        print(kwargs['selected'])
 
 
-class BaseBashOperator(BaseBranchOperator):
-    def choose_branch(self, context):
-        #context['ts'] 는 string 타입의 %Y-%m-%dT%H:%M:%S+00:00 을 반환함
+    class CustomBranchOperator(BaseBranchOperator):
+        def choose_branch(self, context):
+            import random
 
-        ts = datetime.strptime(context['ts'], '%Y-%m-%dT%H:%M:%S+00:00')
-        if int(divmod(ts.minute,2)[1]) == 0:
-            return 'bash_branch_task1'
-        else:
-            return 'empty_task_1'
+            item_lst = ['A', 'B', 'C']
+            selected_item = random.choice(item_lst)
+            if selected_item == 'A':
+                return 'task_a'
+            elif selected_item == 'B':
+                return 'task_b'
+            elif selected_item == 'C':
+                return 'task_c'
+
+    custom_branch_operator = CustomBranchOperator(task_id='branching')
 
 
-bash_branch_task1 = BashOperator(
-    task_id='bash_branch_task1',
-    bash_command='/opt/airflow/plugins/shell/select_fruit.sh Orange',
-    dag=dag
-)
+    task_a = PythonOperator(
+        task_id='task_a',
+        python_callable=common_func,
+        op_kwargs={'selected': 'A'}
+    )
 
-empty_task_1 = EmptyOperator(
-    task_id='empty_task_1'
-)
+    task_b = PythonOperator(
+        task_id='task_b',
+        python_callable=common_func,
+        op_kwargs={'selected': 'B'}
+    )
 
-base_branch_operator = BaseBashOperator(
-    task_id='base_branch_operator',
-    dag=dag
-)
+    task_c = PythonOperator(
+        task_id='task_c',
+        python_callable=common_func,
+        op_kwargs={'selected': 'C'}
+    )
 
-base_branch_operator >> [bash_branch_task1, empty_task_1]
+    custom_branch_operator >> [task_a, task_b, task_c]
