@@ -1,14 +1,18 @@
 from airflow import DAG
 from datetime import datetime
-from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from airflow.operators.python import BranchPythonOperator
-import random
+from random import choice
 
 def select_random():
-    task_lst = ['task_a','task_b','task_c','task_d']
-    select = random.randint(0,3)
-    return task_lst[select]
+    item_lst = ['A','B','C']
+    selected_item = random.choice(item_lst)
+    if selected_item == 'A':
+        return 'task_a'
+    elif selected_item == 'B':
+        return 'task_b'
+    elif selected_item == 'C':
+        return 'task_c'
 
 
 def common_func(**kwargs):
@@ -20,11 +24,6 @@ with DAG(
     schedule=None,
     catchup=False
 ) as dag:
-
-    start_task = BashOperator(
-        task_id='start_task',
-        bash_command='echo start!'
-    )
 
     python_branch_task = BranchPythonOperator(
         task_id='python_branch_task',
@@ -49,10 +48,4 @@ with DAG(
         op_kwargs={'selected':'C'}
     )
 
-    task_d = PythonOperator(
-        task_id='task_d',
-        python_callable=common_func,
-        op_kwargs={'selected':'D'}
-    )
-
-    start_task >> python_branch_task >> [task_a, task_b, task_c, task_d]
+    start_task >> python_branch_task >> [task_a, task_b, task_c]
