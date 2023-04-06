@@ -1,12 +1,11 @@
 # Package Import
 from airflow import DAG
-from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 from airflow.operators.branch import BaseBranchOperator
-from airflow.operators.empty import EmptyOperator
-from datetime import datetime
+import pendulum
 
 with DAG(
-    dag_id='dags_bash_python_with_xcom',
+    dag_id='dags_base_branch_operator',
     start_date=pendulum.datetime(2023,3,20, tz='Asia/Seoul'),
     schedule='2 0 * * *',
     catchup=False
