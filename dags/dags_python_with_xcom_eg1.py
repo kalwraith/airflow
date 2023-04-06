@@ -23,7 +23,7 @@ with DAG(
         value_key1 = ti.xcom_pull(key="key1")
         value_key2 = ti.xcom_pull(key="key2", task_ids='python_xcom_push_task')
         print(value_key1)
-        print(value_key2)
+        print(type(value_key2))
 
 
     xcom_push() >> xcom_pull()
