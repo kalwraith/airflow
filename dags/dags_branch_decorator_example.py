@@ -40,9 +40,4 @@ with DAG(dag_id='dags_branch_decorator_example',
         bash_command='echo "Selected Task C!"'
     )
 
-    task_d = BashOperator(
-        task_id='task_d',
-        bash_command='echo "Selected Task D!"'
-    )
-
-    branching >> [task_a,task_b,task_c,task_d]
+    branching >> [task_a,task_b,task_c]

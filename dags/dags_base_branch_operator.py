@@ -27,7 +27,7 @@ with DAG(
             elif selected_item == 'C':
                 return 'task_c'
 
-    custom_branch_operator = CustomBranchOperator(task_id='branching')
+    custom_branch_operator = CustomBranchOperator(task_id='python_branch_task')
 
 
     task_a = PythonOperator(
