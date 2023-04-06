@@ -13,9 +13,15 @@ with DAG(dag_id='dags_branch_decorator_example',
 
     @task.branch(task_id='branching')
     def random_branch():
-        task_lst = ['task_a', 'task_b', 'task_c', 'task_d']
-        select = random.randint(0, 3)
-        return task_lst[select]
+        import random
+        item_lst = ['A', 'B', 'C']
+        selected_item = random.choice(item_lst)
+        if selected_item == 'A':
+            return 'task_a'
+        elif selected_item == 'B':
+            return 'task_b'
+        elif selected_item == 'C':
+            return 'task_c'
 
     branching = random_branch()
 
