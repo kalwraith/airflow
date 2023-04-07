@@ -12,7 +12,7 @@ with DAG(
     schedule='0 1 * * *',
     catchup=False
 ) as dag:
-    def inner_func2(**kwargs):
+    def inner_func(**kwargs):
         msg = kwargs.get('msg') or ''
         print(msg)
 
@@ -28,7 +28,7 @@ with DAG(
 
         inner_function2 = PythonOperator(
             task_id='inner_function2',
-            python_callable=msg,
+            python_callable=inner_func,
             op_kwargs={'msg':'첫 번째 TaskGroup내 두 번쨰 task입니다.'}
         )
 
@@ -42,7 +42,7 @@ with DAG(
 
         inner_function2 = PythonOperator(
             task_id='inner_function2',
-            python_callable=msg,
+            python_callable=inner_func,
             op_kwargs={'msg': '두 번째 TaskGroup내 두 번쨰 task입니다.'}
         )
 
