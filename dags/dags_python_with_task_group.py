@@ -36,7 +36,7 @@ with DAG(
 
     with TaskGroup(group_id='second_group') as group_2:
         @task(task_id='inner_fuction1')
-        def inner_func3(**kwargs):
+        def inner_func1(**kwargs):
             print('세 번째 함수입니다.')
 
 
@@ -45,6 +45,8 @@ with DAG(
             python_callable=inner_func,
             op_kwargs={'msg': '두 번째 TaskGroup내 두 번쨰 task입니다.'}
         )
+
+        inner_func1() >> inner_function2
 
     empty_final = EmptyOperator(task_id='empty_final')
 
