@@ -50,4 +50,4 @@ with DAG(
         op_kwargs={'selected':'C'}
     )
 
-    python_branch_task >> Label('분기 수행')>> [task_a, task_b, task_c]
+    python_branch_task >> Label('분기 수행') >> [task_a, task_b, task_c]
