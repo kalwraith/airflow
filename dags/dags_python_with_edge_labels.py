@@ -21,7 +21,7 @@ def common_func(**kwargs):
     print(kwargs['selected'])
 
 with DAG(
-    dag_id='dags_branch_python_operator',
+    dag_id='dags_python_with_edge_labels',
     start_date=datetime(2023,2,1),
     schedule=None,
     catchup=False
