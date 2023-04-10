@@ -20,4 +20,4 @@ with DAG(
         bash_command='echo $HOSTNAME',
     )
 
-    bash_task_1 >> bash_task_2
+
