@@ -37,9 +37,12 @@ with DAG(
     @task(task_id='python_2')
     def python_2(**kwargs):
         ti = kwargs['ti']
-        from pprint import pprint
         rslt = ti.xcom_pull(task_ids='bike_list_hist')
-        print(type(rslt))
+        import json
+        from pprint import pprint
+        
+        rslt = json.loads(rslt)
+        pprint(rslt)
         
     bike_list_hist >> python_2()
     vmsm_trdar_stor_qq
