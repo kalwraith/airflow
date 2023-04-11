@@ -13,6 +13,7 @@ with DAG(
 ) as dag:
 
     bash_task_1 = SimpleHttpOperator(
+        task_id='bash_task_1',
         http_conn_id='earthquake_usgs_gov',
         endpoint='fdsnws/event/1/query?format=csv&starttime={{data_interval_start | ds}}&endtime={{data_interval_end | ds}}',
         method='GET',
