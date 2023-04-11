@@ -23,4 +23,7 @@ with DAG(
         ymd_1 = kwargs['params']['ymd_1']
         print(ymd_1)
 
-    task_sample()
+    task_sample = task_sample()
+    task_sample.doc_mc = '''
+    날짜 출력을 위한 task
+    '''
