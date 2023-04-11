@@ -15,7 +15,7 @@ with DAG(
     bash_task_1 = SimpleHttpOperator(
         task_id='bash_task_1',
         http_conn_id='openapi.seoul.go.kr',
-        endpoint='4c545370646b616c3733704a554a55/json/bikeListHist/1/10/2023041008',
+        endpoint='{{var.value.apikey_openapi_seoul_go_kr}}/json/bikeListHist/1/10/2023041008',
         method='GET',
         headers={'Content-Type': 'application/json',
                         'charset': 'utf-8',
