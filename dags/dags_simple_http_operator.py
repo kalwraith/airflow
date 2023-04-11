@@ -26,7 +26,7 @@ with DAG(
     vmsm_trdar_stor_qq = SimpleHttpOperator(
         task_id='vmsm_trdar_stor_qq',
         http_conn_id='openapi.seoul.go.kr',
-        endpoint='{{var.value.apikey_openapi_seoul_go_kr}}/json/VwsmTrdarStorQq/1/10/2023',
+        endpoint='{{var.value.apikey_openapi_seoul_go_kr}}/json/VwsmTrdarStorQq/1/10/2021',
         method='GET',
         headers={'Content-Type': 'application/json',
                         'charset': 'utf-8',
