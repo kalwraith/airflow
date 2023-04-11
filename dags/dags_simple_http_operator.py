@@ -12,10 +12,10 @@ with DAG(
     schedule=None
 ) as dag:
 
-    bike_list_hist = SimpleHttpOperator(
-        task_id='bike_list_hist',
+    tb_cycle_station_info = SimpleHttpOperator(
+        task_id='tb_cycle_station_info',
         http_conn_id='openapi.seoul.go.kr',
-        endpoint='{{var.value.apikey_openapi_seoul_go_kr}}/json/bikeListHist/1/10/2023041101}}',
+        endpoint='{{var.value.apikey_openapi_seoul_go_kr}}/json/tbCycleStationInfo/1/10}}',
         method='GET',
         headers={'Content-Type': 'application/json',
                         'charset': 'utf-8',
@@ -37,12 +37,12 @@ with DAG(
     @task(task_id='python_2')
     def python_2(**kwargs):
         ti = kwargs['ti']
-        rslt = ti.xcom_pull(task_ids='bike_list_hist')
+        rslt = ti.xcom_pull(task_ids='tb_cycle_station_info')
         import json
         from pprint import pprint
         
         rslt = json.loads(rslt)
         pprint(rslt)
         
-    bike_list_hist >> python_2()
+    tb_cycle_station_info >> python_2()
     vmsm_trdar_stor_qq
