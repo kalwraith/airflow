@@ -38,7 +38,8 @@ with DAG(
     def python_2(**kwargs):
         ti = kwargs['ti']
         from pprint import pprint
-        pprint(ti.xcom_pull(task_ids='bike_list_hist'))
-
+        rslt = ti.xcom_pull(task_ids='bike_list_hist')
+        print(type(rslt))
+        
     bike_list_hist >> python_2()
     vmsm_trdar_stor_qq
