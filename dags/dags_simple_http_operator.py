@@ -15,7 +15,7 @@ with DAG(
     bike_list_hist = SimpleHttpOperator(
         task_id='bike_list_hist',
         http_conn_id='openapi.seoul.go.kr',
-        endpoint='{{var.value.apikey_openapi_seoul_go_kr}}/json/bikeListHist/1/10/{{data_interval_end - macros.timedelta(}}',
+        endpoint='{{var.value.apikey_openapi_seoul_go_kr}}/json/bikeListHist/1/10/2023041101}}',
         method='GET',
         headers={'Content-Type': 'application/json',
                         'charset': 'utf-8',
