@@ -35,6 +35,9 @@ with DAG(
         inner_func1() >> inner_function2
 
     with TaskGroup(group_id='second_group', tooltip='TaskGroup import를 이용한 두 번째 그룹입니다.') as group_2:
+        doc_md = """\
+        task group docstring 테스트
+        """
         @task(task_id='inner_function1')
         def inner_func1(**kwargs):
             print('두 번째 TaskGroup 내 첫 번째 task입니다.')
@@ -47,6 +50,7 @@ with DAG(
         )
 
         inner_func1() >> inner_function2
+
 
     empty_final = EmptyOperator(task_id='empty_final')
 
