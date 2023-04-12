@@ -6,7 +6,7 @@ import pendulum
 with DAG(
     dag_id='dags_python_with_conf',
     start_date=pendulum.datetime(2023,3,20, tz='Asia/Seoul'),
-    schedule='2 0 * * *',
+    schedule='0 0 * * *',
     catchup=False,
     params={
         'ymd_1':'{{ (data_interval_end.in_timezone("Asia/Seoul") + macros.dateutil.relativedelta.relativedelta(days=-1)) | ds }}',
