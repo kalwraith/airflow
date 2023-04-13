@@ -5,9 +5,9 @@ import pandas as pd
 class SeoulApiToCsvOperator(BaseOperator):
     template_fields = ('base_url', 'path','file_name','date_dt')
 
-    def __init__(self, http_conn_id, dataset_nm, path, file_name, date_dt=None, **kwargs):
+    def __init__(self, dataset_nm, path, file_name, date_dt=None, **kwargs):
         super().__init__(**kwargs)
-        self.http_conn_id = http_conn_id
+        self.http_conn_id = 'openapi.seoul.go.kr'
         self.path = path
         self.file_name = file_name
         self.endpoint = '{{var.value.apikey_openapi_seoul_go_kr}}/json/' + dataset_nm
