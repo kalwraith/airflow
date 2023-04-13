@@ -11,6 +11,8 @@ class SeoulApiToCsvOperator(BaseOperator):
         self.base_url = '{{var.value.apikey_openapi_seoul_go_kr}}/json/' + dataset_nm
 
     def execute(self, context):
+        import pandas as pd 
+        import os
         connection = BaseHook.get_connection(self.http_conn_id)
         self.base_url = connection.host + '/' + self.base_url
 
@@ -26,7 +28,6 @@ class SeoulApiToCsvOperator(BaseOperator):
                 start_row = end_row + 1
                 end_row += 1000
 
-        import os
         if not os.path.exists(self.path):
             os.system(f'mkdir -p {self.path}')
         total_row_df.to_csv(self.path + '/' + self.file_name, encoding='utf-8', index=False)
