@@ -18,7 +18,8 @@ class SeoulApiToPostgresOperator(BaseOperator):
         import os
         from datetime import date
         from airflow.providers.postgres.hooks.postgres import PostgresHook
-
+        from sqlalchemy import create_engine
+        
         connection = BaseHook.get_connection(self.http_conn_id)
         self.base_url = f'{connection.host}:{connection.port}/{self.endpoint}'
 
