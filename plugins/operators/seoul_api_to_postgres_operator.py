@@ -37,8 +37,9 @@ class SeoulApiToPostgresOperator(BaseOperator):
                 start_row = end_row + 1
                 end_row += 1000
 
-
+        total_row_df.query('~(S_DT.str.startswith(20.02))')
         total_row_df['S_DT'] = total_row_df['S_DT'].apply(lambda x: date(int(x[:4]),int(x[5:7]),int(x[8:10])))
+
         postgres_hook = PostgresHook(postgres_conn_id=self.postgres_conn_id)
         postgres_uri = postgres_hook.get_uri()
 
