@@ -13,7 +13,6 @@ class SeoulApiToCsvOperator(BaseOperator):
     def execute(self, context):
         import pandas as pd 
         import os
-        import json
         
         connection = BaseHook.get_connection(self.http_conn_id)
         self.base_url = f'{connection.host}:{connection.port}/{self.base_url}'
@@ -38,6 +37,8 @@ class SeoulApiToCsvOperator(BaseOperator):
 
     def _call_api(self, base_url, start_row, end_row):
         import requests
+        import json 
+
         headers = {'Content-Type': 'application/json',
                    'charset': 'utf-8',
                    'Accept': '*/*'
@@ -49,6 +50,6 @@ class SeoulApiToCsvOperator(BaseOperator):
 
         key_nm = list(contents.keys())[0]
         row_data = contents.get(key_nm).get('row')
-        row_df = df.DataFrame(row_data)
+        row_df = pd.DataFrame(row_data)
 
         return row_df
