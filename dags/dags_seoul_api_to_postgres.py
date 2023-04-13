@@ -10,5 +10,6 @@ with DAG(
 ) as dag:
     tb_corona19_count_satus = SeoulApiToPostgresOperator(
         task_id='tb_corona19_count_satus',
-        tgt_tbl_nm='TbCorona19CountStatus.csv'
+        dataset_nm='TbCorona19CountStatus',
+        tgt_tbl_nm='TbCorona19CountStatus'
     )
