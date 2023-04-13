@@ -46,7 +46,7 @@ class SeoulApiToPostgresOperator(BaseOperator):
         engine = create_engine(postgres_uri)
         total_row_df.to_sql(name=self.tgt_tbl_nm,
                   con=engine,
-                  schema=postgres_hook.schema(),
+                  schema='hjkim',
                   if_exists='replace',
                   index=False
                             )
