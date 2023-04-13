@@ -10,7 +10,7 @@ with DAG(
 ) as dag:
     seoul_api_task = SeoulApiToCsvOperator(
         task_id='seoul_api_task',
-        http_conn_id='apikey_openapi_seoul_go_kr',
+        http_conn_id='openapi.seoul.go.kr',
         dataset_nm='TbCorona19CountStatus',
         path='/opt/airflow/files/TbCorona19CountStatus/{{data_interval_end | ds_nodash }}',
         file_name='TbCorona19CountStatus.csv'
