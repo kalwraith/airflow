@@ -6,7 +6,6 @@ class SeoulApiToCsvOperator(BaseOperator):
     def __init__(self, http_conn_id, dataset_nm, path, file_name, **kwargs):
         super().__init__(**kwargs)
         self.http_conn_id = http_conn_id
-        self.endpoint = endpoint[1:] if endpoint.startswith('/') else endpoint
         self.path = path
         self.file_name = file_name
         self.base_url = '{{var.value.apikey_openapi_seoul_go_kr}}/json/' + dataset_nm
