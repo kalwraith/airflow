@@ -13,6 +13,8 @@ class SeoulApiToCsvOperator(BaseOperator):
     def execute(self, context):
         import pandas as pd 
         import os
+        import json
+        
         connection = BaseHook.get_connection(self.http_conn_id)
         self.base_url = f'{connection.host}:{connection.port}/{self.base_url}'
 
