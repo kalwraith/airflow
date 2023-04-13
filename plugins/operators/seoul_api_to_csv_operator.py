@@ -3,7 +3,7 @@ from airflow.hooks.base import BaseHook
 import pandas as pd 
 
 class SeoulApiToCsvOperator(BaseOperator):
-    template_fields = ('base_url', 'path','file_name','date_dt')
+    template_fields = ('endpoint', 'path','file_name','date_dt')
 
     def __init__(self, dataset_nm, path, file_name, date_dt=None, **kwargs):
         super().__init__(**kwargs)
