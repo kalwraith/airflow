@@ -39,12 +39,12 @@ class SeoulApiToPostgresOperator(BaseOperator):
 
         total_row_df = total_row_df.query('~(S_DT.str.startswith("20.02"))')
         total_row_df['S_DT'] = total_row_df['S_DT'].apply(lambda x: date(int(x[:4]),int(x[5:7]),int(x[8:10]))).copy()
-
+        total_row_df.columns = [x.lower() for x in total_row_df.columns]
         postgres_hook = PostgresHook(postgres_conn_id=self.postgres_conn_id)
         postgres_uri = postgres_hook.get_uri()
 
         engine = create_engine(postgres_uri)
-        total_row_df.to_sql(name=self.tgt_tbl_nm,
+        total_row_df.to_sql(name=self.tgt_tbl_nm.lower(),
                   con=engine,
                   schema='public',
                   if_exists='replace',
