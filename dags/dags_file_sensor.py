@@ -20,7 +20,7 @@ with DAG(
     TbCorona19CountStatus_sensor = FileSensor(
         task_id='file_sensor_task',
         fs_conn_id='conn_file_opt_airflow_file',
-        filepath='/opt/airflow/files/TbCorona19CountStatus/{{data_interval_end | ds_nodash }}/TbCorona19CountStatus.csv',
+        filepath='TbCorona19CountStatus/{{data_interval_end | ds_nodash }}/TbCorona19CountStatus.csv',
         recursive=False
     )
 
@@ -40,7 +40,7 @@ with DAG(
     count_corona_files_task = PythonOperator(
         task_id='count_corona_files_task',
         python_callable=count_corona_files,
-        op_args=['tvCorona19VaccinestatNew/{{data_interval_end | ds_nodash }}/tvCorona19VaccinestatNew.csv',
+        op_args=['/opt/airflow/files/tvCorona19VaccinestatNew/{{data_interval_end | ds_nodash }}/tvCorona19VaccinestatNew.csv',
                  '/opt/airflow/files/TbCorona19CountStatus/{{data_interval_end | ds_nodash }}/TbCorona19CountStatus.csv']
     )
 
