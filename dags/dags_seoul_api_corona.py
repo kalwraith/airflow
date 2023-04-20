@@ -11,14 +11,14 @@ with DAG(
     tb_corona19_count_satus = SeoulApiToCsvOperator(
         task_id='tb_corona19_count_satus',
         dataset_nm='TbCorona19CountStatus',
-        path='/opt/airflow/files/TbCorona19CountStatus/{{data_interval_end | ds_nodash }}',
+        path='/opt/airflow/files/TbCorona19CountStatus/{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash }}',
         file_name='TbCorona19CountStatus.csv'
     )
 
     tv_corona19_vaccine_stat_new = SeoulApiToCsvOperator(
         task_id='tv_corona19_vaccine_stat_new',
         dataset_nm='tvCorona19VaccinestatNew',
-        path='/opt/airflow/files/tvCorona19VaccinestatNew/{{data_interval_end | ds_nodash }}',
+        path='/opt/airflow/files/tvCorona19VaccinestatNew/{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash }}',
         file_name='tvCorona19VaccinestatNew.csv'
     )
 
