@@ -16,7 +16,7 @@ class SeoulApiToPostgresOperator(BaseOperator):
 
     def execute(self, context):
         import os
-        from datetime import date
+        import pendulum
         from airflow.providers.postgres.hooks.postgres import PostgresHook
         from sqlalchemy import create_engine
         
@@ -38,6 +38,8 @@ class SeoulApiToPostgresOperator(BaseOperator):
                 end_row += 1000
 
         total_row_df.columns = [x.lower() for x in total_row_df.columns]
+        total_row_df['load_dttm'] = pendulum.now(tz='Asia/Seoul')
+        total_row_df['load_dag_id'] = context['ti'].dag_id
         postgres_hook = PostgresHook(postgres_conn_id=self.postgres_conn_id)
         postgres_uri = postgres_hook.get_uri()
 
