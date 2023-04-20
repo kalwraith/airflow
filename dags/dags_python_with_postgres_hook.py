@@ -12,7 +12,7 @@ with DAG(
 ) as dag:
     def insrt_postgres(postgres_conn_id, **kwargs):
         postgres_hook = PostgresHook(postgres_conn_id)
-        conn = postgres_hook.get_connection()
+        conn = postgres_hook.get_conn()
         cursor = conn.cursor()
         dag_id = kwargs.get('ti').dag_id
         task_id = kwargs.get('ti').task_id
