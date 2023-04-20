@@ -10,9 +10,9 @@ with DAG(
 ) as dag:
 
     @task(task_id='insrt_postgres', op_args=['172.18.0.3','5432','hjkim','hjkim','hjkim'])
-    def insrt_postgres(ip: str, port: str, dbname: str, user: str, passwd: str, **kwargs):
+    def insrt_postgres(*args, **kwargs):
         import psycopg2
-        conn = psycopg2.connect(host=ip, dbname=dbname, user=user, password=passwd, port=int(port))
+        conn = psycopg2.connect(host=args[0], dbname=args[2], user=args[3], password=args[4], port=int(args[1]))
         cursor = conn.cursor()
         dag_id = kwargs.get('dag_id')
         task_id = kwargs.get('task_id')
