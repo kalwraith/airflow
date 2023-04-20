@@ -18,7 +18,7 @@ with DAG(
     )
 
     TbCorona19CountStatus_sensor = FileSensor(
-        task_id='file_sensor_task',
+        task_id='TbCorona19CountStatus_sensor',
         fs_conn_id='conn_file_opt_airflow_file',
         filepath='TbCorona19CountStatus/{{data_interval_end | ds_nodash }}/TbCorona19CountStatus.csv',
         recursive=False
