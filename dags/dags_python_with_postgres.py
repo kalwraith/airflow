@@ -1,6 +1,7 @@
 from airflow import DAG
 import pendulum
 from airflow.decorators import task
+from airflow.operators.python import PythonOperator
 
 with DAG(
     dag_id='dags_python_with_postgres',
@@ -9,10 +10,10 @@ with DAG(
     catchup=False
 ) as dag:
 
-    @task(task_id='insrt_postgres', op_args=['172.18.0.3','5432','hjkim','hjkim','hjkim'])
-    def insrt_postgres(*args, **kwargs):
+    
+    def insrt_postgres(ip, port, dbname, user, passwd, **kwargs):
         import psycopg2
-        conn = psycopg2.connect(host=args[0], dbname=args[2], user=args[3], password=args[4], port=int(args[1]))
+        conn = psycopg2.connect(host=ip, dbname=dbname, user=user, password=passwd, port=int(port))
         cursor = conn.cursor()
         dag_id = kwargs.get('dag_id')
         task_id = kwargs.get('task_id')
@@ -22,5 +23,11 @@ with DAG(
         cursor.execute(sql,(dag_id,task_id,run_id,msg))
         conn.commit()
         conn.close()
+    
+    insrt_postgres = PythonOperator(
+        task_id='insrt_postgres',
+        python_callable=insrt_postgres,
+        op_args=['172.18.0.3', '5432', 'hjkim', 'hjkim', 'hjkim']
+    )
         
-    insrt_postgres()
+    insrt_postgres
