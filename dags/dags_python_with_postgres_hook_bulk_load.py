@@ -11,10 +11,9 @@ with DAG(
 ) as dag:
     def insrt_postgres(postgres_conn_id, **kwargs):
         from airflow.providers.postgres.hooks.postgres import PostgresHook
-        from contextlib import closing
 
         postgres_hook = PostgresHook(postgres_conn_id)
-        postgres_hook.bulk_load('TbCorona19CountStatus_test',
+        postgres_hook.bulk_load('TbCorona19CountStatus_test',       # 테이블 생성 필요
                                 '/opt/airflow/files/TbCorona19CountStatus/20230420/TbCorona19CountStatus.csv')
 
     insrt_postgres = PythonOperator(
