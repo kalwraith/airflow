@@ -27,8 +27,13 @@ class CustomPostgresHook(BaseHook):
         self.get_conn()
         header = 0 if header_yn else None                       # header_yn = True면 0, False면 None
         if_exists = 'replace' if replace_yn else 'append'       # replace_yn = True면 replace, False면 append
+
+        os.system(f"tr -d '\015' < {file_name} > {file_name}.temp")     # ^M 제거 
+        os.system(f"mv {file_name}.temp {file_name}")
+        os.system(f"rm {file_name}.temp")
+        
         file_df = pd.read_csv(file_name, header=header, delimiter=delimiter)
-        file_df.replace('\r','').replace('\n','', inplace=True)                  # 개행문자 ^M 제거
+
         
         self.log.info('적재 건수:' + str(len(file_df)))
         uri = f'postgresql://{self.user}:{self.password}@{self.host}/{self.dbname}'
