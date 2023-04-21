@@ -14,7 +14,7 @@ with DAG(
         from contextlib import closing
 
         postgres_hook = PostgresHook(postgres_conn_id)
-        postgres_hook.bulk_load('TbCorona19CountStatus',
+        postgres_hook.bulk_load('TbCorona19CountStatus_v2',
                                 '/opt/airflow/files/TbCorona19CountStatus/{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash }}/TbCorona19CountStatus.csv')
 
     insrt_postgres = PythonOperator(
