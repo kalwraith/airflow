@@ -21,6 +21,8 @@ class CustomPostgresHook(BaseHook):
 
 
     def bulk_load(self, table_name, file_name, delimiter: str, header_yn: bool):
+        from sqlalchemy import create_engine
+        
         self.get_conn()
         header = 0 if header_yn else None               # header_yn = True면 0, False면 None
         file_df = pd.read_csv(file_name, header=header, delimiter=delimiter)
