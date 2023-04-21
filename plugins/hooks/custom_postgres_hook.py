@@ -22,12 +22,15 @@ class CustomPostgresHook(BaseHook):
 
     def bulk_load(self, table_name, file_name, delimiter: str, header_yn: bool, replace_yn: bool):
         from sqlalchemy import create_engine
-        
+        self.log.info('적재 대상파일:' + file_name)
+        self.log.info('테이블 :' + table_name)
         self.get_conn()
         header = 0 if header_yn else None                       # header_yn = True면 0, False면 None
         if_exists = 'replace' if replace_yn else 'append'       # replace_yn = True면 replace, False면 append
         file_df = pd.read_csv(file_name, header=header, delimiter=delimiter)
         file_df = file_df.apply(lambda x: x.replace('\r',''))       # 개행문자 ^M 제거 
+        
+        self.log.info('적재 건수:' + str(len(file_df)))
         uri = f'postgresql://{self.user}:{self.password}@{self.host}/{self.dbname}'
         engine = create_engine(uri)
         file_df.to_sql(name=table_name,
