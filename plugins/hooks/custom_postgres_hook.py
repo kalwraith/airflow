@@ -30,8 +30,12 @@ class CustomPostgresHook(BaseHook):
         file_df = pd.read_csv(file_name, header=header, delimiter=delimiter)
 
         for col in file_df.columns:                             # 줄넘김 및 ^M 제거
-            file_df[col].str.replace('\r','').replace('\n','', inplace=True)
-        
+            try:
+                # string 문자열이 아닐 경우 continue
+                file_df[col].str.replace('\r','').replace('\n','', inplace=True)
+            except:
+                continue 
+                
         self.log.info('적재 건수:' + str(len(file_df)))
         uri = f'postgresql://{self.user}:{self.password}@{self.host}/{self.dbname}'
         engine = create_engine(uri)
