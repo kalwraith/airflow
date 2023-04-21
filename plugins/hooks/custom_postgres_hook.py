@@ -32,7 +32,7 @@ class CustomPostgresHook(BaseHook):
         for col in file_df.columns:                             # 줄넘김 및 ^M 제거
             try:
                 # string 문자열이 아닐 경우 continue
-                file_df[col] = file_df[col].str.replace('\r','').replace('\n','')
+                file_df[col] = file_df[col].str.replace('\r\n','')
                 self.log.info(f'{table_name}.{col}: 개행문자 제거')
             except:
                 continue 
