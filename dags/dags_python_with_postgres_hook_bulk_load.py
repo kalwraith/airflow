@@ -9,15 +9,16 @@ with DAG(
         schedule='0 7 * * *',
         catchup=False
 ) as dag:
-    def insrt_postgres(postgres_conn_id, **kwargs):
+    def insrt_postgres(postgres_conn_id, tbl_nm, file_nm, **kwargs):
         from airflow.providers.postgres.hooks.postgres import PostgresHook
 
         postgres_hook = PostgresHook(postgres_conn_id)
-        postgres_hook.bulk_load('TbCorona19CountStatus_test',       # 테이블 생성 필요
-                                '/opt/airflow/files/TbCorona19CountStatus/20230420/TbCorona19CountStatus.csv')
+        postgres_hook.bulk_load(tbl_nm, file_nm)
 
     insrt_postgres = PythonOperator(
         task_id='insrt_postgres',
         python_callable=insrt_postgres,
-        op_kwargs={'postgres_conn_id': 'conn-db-postgres-custom'}
+        op_kwargs={'postgres_conn_id': 'conn-db-postgres-custom',
+                   'tbl_nm':'TbCorona19CountStatus_test',
+                   'file_nm':'/opt/airflow/files/TbCorona19CountStatus/{{data_interval_end.in_timezone("Asia/Seoul"}}/TbCorona19CountStatus.csv'}
     )
