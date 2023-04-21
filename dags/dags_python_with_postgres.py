@@ -13,18 +13,18 @@ with DAG(
     
     def insrt_postgres(ip, port, dbname, user, passwd, **kwargs):
         import psycopg2
+        from contextlib import closing
 
-        conn = psycopg2.connect(host=ip, dbname=dbname, user=user, password=passwd, port=int(port))
-        cursor = conn.cursor()
-        dag_id = kwargs.get('ti').dag_id
-        task_id = kwargs.get('ti').task_id
-        run_id = kwargs.get('ti').run_id
-        sql = 'insert into test_python_operator values (%s,%s,%s,%s);'
-        msg = 'insrt 수행'
-        cursor.execute(sql,(dag_id,task_id,run_id,msg))
-        conn.commit()
-        conn.close()
-    
+        with closing(psycopg2.connect(host=ip, dbname=dbname, user=user, password=passwd, port=int(port))) as conn:
+            with closing(conn.cursor()) as cursor:
+                dag_id = kwargs.get('ti').dag_id
+                task_id = kwargs.get('ti').task_id
+                run_id = kwargs.get('ti').run_id
+                sql = 'insert into test_python_operator values (%s,%s,%s,%s);'
+                msg = 'insrt 수행'
+                cursor.execute(sql,(dag_id,task_id,run_id,msg))
+                conn.commit()
+
     insrt_postgres = PythonOperator(
         task_id='insrt_postgres',
         python_callable=insrt_postgres,
