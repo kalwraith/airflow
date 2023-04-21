@@ -12,17 +12,18 @@ with DAG(
 ) as dag:
     def insrt_postgres(postgres_conn_id, **kwargs):
         from airflow.providers.postgres.hooks.postgres import PostgresHook
+        from contextlib import closing
+        
         postgres_hook = PostgresHook(postgres_conn_id)
-        conn = postgres_hook.get_conn()
-        cursor = conn.cursor()
-        dag_id = kwargs.get('ti').dag_id
-        task_id = kwargs.get('ti').task_id
-        run_id = kwargs.get('ti').run_id
-        sql = 'insert into test_python_operator values (%s,%s,%s,%s);'
-        msg = 'insrt 수행'
-        cursor.execute(sql, (dag_id, task_id, run_id, msg))
-        conn.commit()
-        conn.close()
+        with closing(postgres_hook.get_conn()) as conn:
+            with closing(conn.cursor()) as cursor:
+                dag_id = kwargs.get('ti').dag_id
+                task_id = kwargs.get('ti').task_id
+                run_id = kwargs.get('ti').run_id
+                sql = 'insert into test_python_operator values (%s,%s,%s,%s);'
+                msg = 'insrt 수행'
+                cursor.execute(sql, (dag_id, task_id, run_id, msg))
+                conn.commit()
 
     insrt_postgres = PythonOperator(
         task_id='insrt_postgres',
