@@ -11,7 +11,7 @@ with DAG(
 ) as dag:
     def insrt_postgres(postgres_conn_id, tbl_nm, file_nm, **kwargs):
         custom_postgres_hook = CustomPostgresHook(postgres_conn_id=postgres_conn_id)
-        custom_postgres_hook.bulk_load(tbl_nm, file_nm, ',', True)
+        custom_postgres_hook.bulk_load(table_name=tbl_nm, file_name=file_nm, delimiter=',', header_yn=True, replace_yn=True)
 
     insrt_postgres = PythonOperator(
         task_id='insrt_postgres',
