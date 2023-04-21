@@ -30,7 +30,6 @@ class CustomPostgresHook(BaseHook):
 
         os.system(f"tr -d '\015' < {file_name} > {file_name}.temp")     # ^M 제거 
         os.system(f"mv {file_name}.temp {file_name}")
-        os.system(f"rm {file_name}.temp")
         
         file_df = pd.read_csv(file_name, header=header, delimiter=delimiter)
 
