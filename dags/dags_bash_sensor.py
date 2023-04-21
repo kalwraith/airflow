@@ -13,7 +13,7 @@ with DAG(
     sensor_task = BashSensor(
         task_id='sensor_task',
         env={'FILE':'/opt/airflow/files/tvCorona19VaccinestatNew/{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash }}/tvCorona19VaccinestatNew.csv'},
-        bash_command='if [ -e $FILE ]; then \
+        bash_command='echo $FILE && if [ -e $FILE ]; then \
                           exit 0 \
                       else \
                           exit 1 \
