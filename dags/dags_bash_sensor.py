@@ -13,11 +13,12 @@ with DAG(
     sensor_task = BashSensor(
         task_id='sensor_task',
         env={'FILE':'/opt/airflow/files/tvCorona19VaccinestatNew/{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash }}/tvCorona19VaccinestatNew.csv'},
-        bash_command='echo $FILE && if [ -e $FILE ]; then \
-                          exit 0 \
-                      else \
-                          exit 1 \
-                      fi',
+        bash_command=f'''echo $FILE && 
+                        if [ -f $FILE ]; then 
+                              exit 0
+                        else 
+                              exit 1
+                        fi''',
         poke_interval=600,    # 10분
         timeout=60 * 60 * 24  # 1일
     )
