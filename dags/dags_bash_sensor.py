@@ -19,9 +19,9 @@ with DAG(
                         else 
                               exit 1
                         fi''',
-        poke_interval=600,    # 10분
+        poke_interval=300,    # 5분
         timeout=60 * 60 * 24,  # 1일
-        mode='reschedule'
+        mode='poke'
     )
 
     bash_task = BashOperator(
