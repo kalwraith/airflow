@@ -20,14 +20,14 @@ class CustomPostgresHook(BaseHook):
         self.postgres_conn = psycopg2.connect(host=self.host, user=self.user, password=self.password, dbname=self.dbname, port=self.port)
         return self.postgres_conn
 
-    def bulk_load(self, table_name, file_name, delimiter: str, header_yn: bool, replace_yn: bool):
+    def bulk_load(self, table_name, file_name, delimiter: str, is_header: bool, is_replace: bool):
         from sqlalchemy import create_engine
 
         self.log.info('적재 대상파일:' + file_name)
         self.log.info('테이블 :' + table_name)
         _ = self.get_conn()
-        header = 0 if header_yn else None                       # header_yn = True면 0, False면 None
-        if_exists = 'replace' if replace_yn else 'append'       # replace_yn = True면 replace, False면 append
+        header = 0 if is_header else None                       # is_header = True면 0, False면 None
+        if_exists = 'replace' if is_replace else 'append'       # is_replace = True면 replace, False면 append
         file_df = pd.read_csv(file_name, header=header, delimiter=delimiter)
 
         for col in file_df.columns:                             # 줄넘김 및 ^M 제거
