@@ -10,11 +10,10 @@ with DAG(
     catchup=False
 ) as dag:
     def check_api_update(http_conn_id, endpoint, base_dt_col, **kwargs):
-        # url 불러오기
-        response = requests.get(url)
         connection = BaseHook.get_connection(http_conn_id)
-        self.base_url = f'http://{connection.host}:{connection.port}/{endpoint}/1/100'
-
+        url = f'http://{connection.host}:{connection.port}/{endpoint}/1/100'
+        response = requests.get(url)
+        
         contents = json.loads(response.text)
         key_nm = list(contents.keys())[0]
         row_data = contents.get(key_nm).get('row')
@@ -37,7 +36,8 @@ with DAG(
     sensor_task = PythonSensor(
         task_id='sensor_task',
         python_callable=check_api_update,
-        op_kwargs={'http_conn_id':'openapi.seoul.go.kr','endpoint':'{{var.value.apikey_openapi_seoul_go_kr}}/json/TbCorona19CountStatus',
+        op_kwargs={'http_conn_id':'openapi.seoul.go.kr',
+                   'endpoint':'{{var.value.apikey_openapi_seoul_go_kr}}/json/TbCorona19CountStatus',
                    'base_dt_col':'S_DT'},
         poke_interval=600,   #10분
         mode='reschedule'
