@@ -23,7 +23,7 @@ def common_func(**kwargs):
 with DAG(
     dag_id='dags_branch_python_operator',
     start_date=datetime(2023,2,1),
-    schedule=None,
+    schedule='0 1 * * *',
     catchup=False
 ) as dag:
 
