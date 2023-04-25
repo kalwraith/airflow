@@ -28,7 +28,7 @@ with DAG(
             from airflow.exceptions import AirflowException
             AirflowException(f'{base_dt_col} 컬럼은 YYYY.MM.DD 또는 YYYY/MM/DD 형태가 아닙니다.')
 
-        today_ymd = kwargs.get('data_interval_end').strftime('%Y-%m-%d')
+        today_ymd = kwargs.get('data_interval_end').in_timezone('Asia/Seoul').strftime('%Y-%m-%d')
         if last_date == today_ymd:
             print(f'금일 데이터{today_ymd} 생성 확인')
             return True
