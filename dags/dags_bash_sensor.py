@@ -21,7 +21,8 @@ with DAG(
                         fi''',
         poke_interval=300,    # 5분
         timeout=60 * 60 * 24,  # 1일
-        mode='poke'
+        mode='poke',
+        soft_fail=True
     )
 
     bash_task = BashOperator(
