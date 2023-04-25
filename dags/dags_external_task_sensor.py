@@ -8,7 +8,7 @@ from airflow.utils.state import State
 with DAG(
     dag_id='dags_external_task_sensor',
     start_date=pendulum.datetime(2023,4,1, tz='Asia/Seoul'),
-    schedule='0 7 * * 1',
+    schedule='0 7 * * *',
     catchup=False
 ) as dag:
     external_task_sensor = ExternalTaskSensor(
@@ -16,5 +16,5 @@ with DAG(
         external_dag_id='dags_branch_python_operator',
         external_task_id='task_b',
         allowed_states=[State.SKIPPED],
-        execution_delta=timedelta(hours=-6)
+        execution_delta=timedelta(hours=6)
     )
