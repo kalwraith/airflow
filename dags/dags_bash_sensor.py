@@ -20,7 +20,7 @@ with DAG(
                               exit 1
                         fi''',
         poke_interval=300,    # 5분
-        timeout=60 * 60 * 24,  # 1일
+        timeout=60 * 15,     #15분
         mode='poke',
         soft_fail=True
     )
