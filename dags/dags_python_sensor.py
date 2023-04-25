@@ -33,6 +33,7 @@ with DAG(
             print(f'금일 데이터{today_ymd} 생성 확인')
             return True
         else:
+            print(f'API Last 날짜:{last_date}, 금일 날짜: {today_ymd}')
             return False
 
     sensor_task = PythonSensor(
