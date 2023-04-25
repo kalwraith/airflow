@@ -29,11 +29,11 @@ with DAG(
             AirflowException(f'{base_dt_col} 컬럼은 YYYY.MM.DD 또는 YYYY/MM/DD 형태가 아닙니다.')
 
         today_ymd = kwargs.get('data_interval_end').in_timezone('Asia/Seoul').strftime('%Y-%m-%d')
-        if last_date == today_ymd:
+        if last_date >= today_ymd:
             print(f'금일 데이터{today_ymd} 생성 확인')
             return True
         else:
-            print(f'API Last 날짜:{last_date}, 금일 날짜: {today_ymd}')
+            print(f'Update 미완료 (API Last 날짜:{last_date}, 금일 날짜: {today_ymd})')
             return False
 
     sensor_task = PythonSensor(
