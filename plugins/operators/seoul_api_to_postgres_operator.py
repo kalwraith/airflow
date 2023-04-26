@@ -21,7 +21,7 @@ class SeoulApiToPostgresOperator(BaseOperator):
         from sqlalchemy import create_engine
         
         connection = BaseHook.get_connection(self.http_conn_id)
-        self.base_url = f'{connection.host}:{connection.port}/{self.endpoint}'
+        self.base_url = f'http://{connection.host}:{connection.port}/{self.endpoint}'
 
         total_row_df = pd.DataFrame()
         start_row = 1
