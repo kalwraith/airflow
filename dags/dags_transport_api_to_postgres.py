@@ -9,7 +9,7 @@ with DAG(
         catchup=False
 ) as dag:
     #실시간 영업소간 통행시간
-    real_unit_trtm_vo = SeoulApiToPostgresOperator(
+    real_unit_trtm_vo = TransportApiToPostgresOperator(
         task_id='real_unit_trtm_vo',
         product_id='PRDTNUM_000000020313',
         tgt_tbl_nm='real_unit_trtm_vo',
