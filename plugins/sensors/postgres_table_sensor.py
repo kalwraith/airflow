@@ -2,7 +2,7 @@ from airflow.sensors.base import BaseSensorOperator
 from hooks.custom_postgres_hook import CustomPostgresHook
 
 class PostgresTableSensor(BaseSensorOperator):
-    template_fields = (table_name)
+    template_fields = ('table_name')
     def __init__(self, postgres_conn_id, table_name, **kwargs):
         super().__init__(**kwargs)
         self.postgres_conn_id = postgres_conn_id
