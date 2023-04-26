@@ -3,7 +3,7 @@ from airflow.hooks.base import BaseHook
 import pandas as pd
 
 
-class SeoulApiToPostgresOperator(BaseOperator):
+class TransportApiToPostgresOperator(BaseOperator):
     template_fields = ('endpoint', 'base_dt')
 
     def __init__(self, product_id, tgt_tbl_nm, option_dict: dict = None, **kwargs):
@@ -60,6 +60,7 @@ class SeoulApiToPostgresOperator(BaseOperator):
                    }
 
         request_url = f'{base_url}&pageNo={page_no}'
+        self.log.info(f'request url:{request_url}')
         response = requests.get(request_url, headers)
         contents = json.loads(response.text)
 
