@@ -7,7 +7,7 @@ import os
 class CustomPostgresHook(BaseHook):
 
     def __init__(self, postgres_conn_id, **kwargs):
-        super.__init__(**kwargs)
+        super().__init__(**kwargs)
         self.postgres_conn_id = postgres_conn_id
 
     def get_conn(self):
