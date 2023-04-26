@@ -11,6 +11,7 @@ with DAG(
 ) as dag:
     postgres_table_sensor = PostgresTableSensor(
         task_id='postgres_table_sensor',
+        postgres_conn_id='conn-db-postgres-custom',
         table_name='tbcorona19countstatus',
         poke_interval=300,
         mode='reschedule'
