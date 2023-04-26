@@ -16,7 +16,7 @@ class PostgresTableSensor(BaseSensorOperator):
         check_sql = f"select count(1) from pg_tables where schemaname='public' AND tablename= %s ;"
         self.log.info(f'조회 쿼리: {check_sql}')
 
-        cur.execute(check_sql, (self.table_name))
+        cur.execute(check_sql, (self.table_name,))
         rslt_set = cur.fetchall()
         rslt = int(rslt_set[0][0])
         self.log.info(f'테이블 개수: {rslt}')
