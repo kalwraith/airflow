@@ -10,8 +10,8 @@ class PostgresTableSensor(BaseSensorOperator):
 
 
     def poke(self, context):
-        custom_postgres_hook = CustomPostgresHook
-        postgres_conn = custom_postgres_hook.get_conn(self.postgres_conn_id)
+        custom_postgres_hook = CustomPostgresHook(self.postgres_conn_id)
+        postgres_conn = custom_postgres_hook.get_conn()
         cur = postgres_conn.cursor()
         check_sql = f"select count(*) from pg_tables where schemaname='public' AND tablename=%s;"
         self.log.info(f'조회 쿼리: {check_sql}')
