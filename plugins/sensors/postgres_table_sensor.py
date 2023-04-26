@@ -13,7 +13,7 @@ class PostgresTableSensor(BaseSensorOperator):
         custom_postgres_hook = CustomPostgresHook(self.postgres_conn_id)
         postgres_conn = custom_postgres_hook.get_conn()
         cur = postgres_conn.cursor()
-        check_sql = f"select count(*) from pg_tables where schemaname='public' AND tablename=%s;"
+        check_sql = f"select count(1) from pg_tables where schemaname='public' AND tablename= %s ;"
         self.log.info(f'조회 쿼리: {check_sql}')
 
         cur.execute(check_sql, (self.table_name))
