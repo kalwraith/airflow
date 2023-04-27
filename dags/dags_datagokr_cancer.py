@@ -12,7 +12,8 @@ with DAG(
     patient_number = DataGoKrApiToPostgresOperator(
         task_id='real_unit_trtm_vo',
         dataset_group='B551172/brst',
-        dataset_nm='patientNumber'
+        dataset_nm='patientNumber',
+        tgt_tbl_nm='breast_cancer_patient_number'
     )
 
 
