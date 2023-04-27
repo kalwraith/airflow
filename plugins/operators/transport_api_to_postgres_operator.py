@@ -4,7 +4,7 @@ import pandas as pd
 
 
 class TransportApiToPostgresOperator(BaseOperator):
-    template_fields = ('endpoint', 'base_dt')
+    template_fields = ('endpoint',)
 
     def __init__(self, product_id, tgt_tbl_nm, option_dict: dict = None, **kwargs):
         super().__init__(**kwargs)
