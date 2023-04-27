@@ -78,5 +78,5 @@ class DataGoKrApiToPostgresOperator(BaseOperator):
             if isinstance(v,list):
                 row_df = pd.DataFrame(v)
 
-        page_size = (total_count // 100) + 1
+        page_size = (int(total_count) // 100) + 1
         return row_df, page_size
