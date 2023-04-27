@@ -11,7 +11,7 @@ class TransportApiToPostgresOperator(BaseOperator):
         self.http_conn_id = 'openapi.transportation.kr'
         self.postgres_conn_id = 'conn-db-postgres-custom'
         self.tgt_tbl_nm = tgt_tbl_nm
-        self.endpoint = 'api?apiKey={{var.value.apikey_openapi_transportation}}&productId=' + product_id
+        self.endpoint = 'api?apiKey=a12248c4-10b9-4b8d-bcfc-5e141b5bc091&productId=' + product_id + '&numOfRows=100'
         if option_dict:
             for k, v in option_dict.items():
                 self.endpoint += f'&{k}={v}'
