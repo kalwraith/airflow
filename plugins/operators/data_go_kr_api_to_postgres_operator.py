@@ -75,8 +75,8 @@ class DataGoKrApiToPostgresOperator(BaseOperator):
         for k, v in rslt.items():
             if k == 'totalCount':
                 total_count = v
-            if isinstance(v,list):
-                row_df = pd.DataFrame(v)
+            if k == 'items':
+                row_df = pd.DataFrame(v.get('items'))
 
         page_size = (int(total_count) // 100) + 1
         return row_df, page_size
