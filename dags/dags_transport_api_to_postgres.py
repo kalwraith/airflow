@@ -13,7 +13,7 @@ with DAG(
         task_id='real_unit_trtm_vo',
         product_id='PRDTNUM_000000020313',
         tgt_tbl_nm='real_unit_trtm_vo',
-        option_dict={'sumTmUnitTypeCode:3'}
+        option_dict={'sumTmUnitTypeCode': 3}
     )
 
 
