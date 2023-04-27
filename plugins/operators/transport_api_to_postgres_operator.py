@@ -11,7 +11,7 @@ class TransportApiToPostgresOperator(BaseOperator):
         self.http_conn_id = 'openapi.transportation.kr'
         self.postgres_conn_id = 'conn-db-postgres-custom'
         self.tgt_tbl_nm = tgt_tbl_nm
-        self.endpoint = 'api?apiKey={{var.value.apikey_openapi_transportation}}&productId=' + product_id + '&numOfRows=100'
+        self.endpoint = 'api?apiKey={{var.value.apikey_openapi_transportation}}&productId=' + product_id + '&numOfRows=1000'
         if option_dict:
             for k, v in option_dict.items():
                 self.endpoint += f'&{k}={v}'
@@ -28,7 +28,8 @@ class TransportApiToPostgresOperator(BaseOperator):
         total_row_df = pd.DataFrame()
         start_page = 1
         while True:
-            self.log.info(f'pageNo:{start_page}')
+            page_size = '??'
+            self.log.info(f'pageNo / pageSize:{start_page} / {page_size}')
             row_df, page_size = self._call_api(self.base_url, start_page)
             total_row_df = pd.concat([total_row_df, row_df])
             if int(page_size) <= start_page:
