@@ -11,10 +11,10 @@ class DataGoKrApiToPostgresOperator(BaseOperator):
         dataset_group: B551172/brst(국립암센터) /B552735/k-startup (창업진흥원) 과 같이 데이터를 제공하는 기관마다의 정해진 값이 존재함.
         '''
         super().__init__(**kwargs)
-        self.http_conn_id = 'openapi.transportation.kr'
+        self.http_conn_id = 'openapi.data.go.kr'
         self.postgres_conn_id = 'conn-db-postgres-custom'
         self.tgt_tbl_nm = tgt_tbl_nm
-        self.endpoint = f'/{dataset_group}/{dataset_nm}' + '?serviceKey={{var.value.apikey_openapi_data_go_kr}}&numOfRows=100'  # data.go.kr의 numOfRows는 100이 Max
+        self.endpoint = f'{dataset_group}/{dataset_nm}' + '?serviceKey={{var.value.apikey_openapi_data_go_kr}}&numOfRows=100'  # data.go.kr의 numOfRows는 100이 Max
         if option_dict:
             for k, v in option_dict.items():
                 self.endpoint += f'&{k}={v}'
