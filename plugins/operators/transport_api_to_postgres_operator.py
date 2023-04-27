@@ -27,15 +27,18 @@ class TransportApiToPostgresOperator(BaseOperator):
 
         total_row_df = pd.DataFrame()
         start_page = 1
+        page_size = '??'
         while True:
-            page_size = '??'
             self.log.info(f'pageNo / pageSize:{start_page} / {page_size}')
             row_df, page_size = self._call_api(self.base_url, start_page)
+            self.log.info(f'추출 건수: {row_df.shape[0]}')
             total_row_df = pd.concat([total_row_df, row_df])
             if int(page_size) <= start_page:
                 break
             else:
                 start_page = start_page + 1
+            import time
+            time.sleep(3)
 
         total_row_df.columns = [x.lower() for x in total_row_df.columns]
         total_row_df['load_dttm'] = datetime.now()
