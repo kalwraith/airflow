@@ -33,7 +33,8 @@ class SeoulApiTodaySensor(BaseSensorOperator):
         last_dt = row_data[0].get(self.base_dt_col)
         last_date = last_dt[:10]
         last_date = last_date.replace('.', '-').replace('/', '-')
-        today_ymd = (context.get('data_interval_end').in_timezone('Asia/Seoul') + relativedelta(days=-1)).strftime('%Y-%m-%d')
+        today_ymd = context.get('data_interval_end').in_timezone('Asia/Seoul').strftime('%Y-%m-%d')
+        today_d1_ymd = (context.get('data_interval_end').in_timezone('Asia/Seoul') + relativedelta(days=-1)).strftime('%Y-%m-%d')
         try:
             import pendulum
             pendulum.from_format(last_date, 'YYYY-MM-DD')
@@ -43,8 +44,8 @@ class SeoulApiTodaySensor(BaseSensorOperator):
 
         
         if last_date >= today_ymd:
-            self.log.info(f'배치 일자 데이터{today_ymd} 생성 확인')
+            self.log.info(f'생성 확인(배치 날짜: {today_ymd} / API Last 날짜: {last_date})')
             return True
         else:
-            self.log.info(f'Update 미완료 (API Last 날짜:{last_date}, 배치 날짜: {today_ymd})')
+            self.log.info(f'Update 미완료 (배치 날짜: {today_ymd} / API Last 날짜:{last_date})')
             return False
