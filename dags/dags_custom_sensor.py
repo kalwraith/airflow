@@ -21,7 +21,7 @@ with DAG(
     seoul_api_sensor = SeoulApiTodaySensor(
         task_id='seoul_api_sensor',
         dataset_nm='TbCorona19CountStatus',
-        dase_dt_col='S_DT',
+        base_dt_col='S_DT',
         poke_interval=600,
         mode='reschedule'
     )
