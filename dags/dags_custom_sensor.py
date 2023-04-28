@@ -1,5 +1,6 @@
 from airflow.sensors.bash import BashSensor
 from sensors.postgres_table_sensor import PostgresTableSensor
+from sensors.seoul_api_today_sensor import SeoulApiTodaySensor
 from airflow import DAG
 import pendulum
 
@@ -14,5 +15,13 @@ with DAG(
         postgres_conn_id='conn-db-postgres-custom',
         table_name='tbcorona19countstatus',
         poke_interval=300,
+        mode='reschedule'
+    )
+    
+    seoul_api_sensor = SeoulApiTodaySensor(
+        task_id='seoul_api_sensor',
+        dataset_nm='TbCorona19CountStatus',
+        dase_dt_col='S_DT',
+        poke_interval=600,
         mode='reschedule'
     )
