@@ -32,6 +32,7 @@ class SeoulApiTodaySensor(BaseSensorOperator):
         last_date = last_dt[:10]
         last_date = last_date.replace('.', '-').replace('/', '-')
         try:
+            import pendulum
             pendulum.from_format(last_date, 'YYYY-MM-DD')
         except:
             from airflow.exceptions import AirflowException
