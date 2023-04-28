@@ -6,7 +6,7 @@ import pendulum
 sample_dataset = Dataset("produced_dag_dataset_test")
 
 with DAG(
-        dag_id='dag_dataset_test_produced',
+        dag_id='dags_dataset_test_produced',
         schedule='0 7 * * *',
         start_date=pendulum.datetime(2023, 4, 1, tz='Asia/Seoul'),
         catchup=False
@@ -19,13 +19,12 @@ with DAG(
 
 
 with DAG(
-        dag_id='dag_dataset_test_consumed',
+        dag_id='dags_dataset_test_consumed',
         schedule=[sample_dataset],
         start_date=pendulum.datetime(2023, 4, 1, tz='Asia/Seoul'),
         catchup=False
 ) as dag2:
     bash_task_2 = BashOperator(
         task_id='bash_task_2',
-        #outlets=[sample_dataset],
-        bash_command='echo 1'
+        bash_command='echo {{ ti.run_id }}'
     )
