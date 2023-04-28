@@ -13,7 +13,7 @@ with DAG(
 ) as dag1:
     bash_task_1 = BashOperator(
         task_id='bash_task_1',
-        #outlets=[sample_dataset],
+        outlets=[sample_dataset],
         bash_command='echo 1'
     )
 
