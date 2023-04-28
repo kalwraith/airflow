@@ -3,7 +3,7 @@ from airflow.hooks.base import BaseHook
 
 '''
 서울시 공공데이터 API 추출시 특정 날짜 컬럼을 조사하여 
-당일 날짜가 존재하는지 체크하는 센서 
+배치 날짜 기준 전날 데이터가 존재하는지 체크하는 센서 
 1. 데이터셋에 날짜 컬럼이 존재하고
 2. API 사용시 그 날짜 컬럼으로 ORDER BY DESC 되어 가져온다는 가정하에 사용 가능
 '''
@@ -21,6 +21,7 @@ class SeoulApiTodaySensor(BaseSensorOperator):
     def poke(self, context):
         import requests
         import json
+        from dateutil.relativedelta import relativedelta
         connection = BaseHook.get_connection(self.http_conn_id)
         url = f'http://{connection.host}:{connection.port}/{self.endpoint}'
         self.log.info(f'request url:{url}')
@@ -32,7 +33,7 @@ class SeoulApiTodaySensor(BaseSensorOperator):
         last_dt = row_data[0].get(self.base_dt_col)
         last_date = last_dt[:10]
         last_date = last_date.replace('.', '-').replace('/', '-')
-        today_ymd = context.get('data_interval_end').in_timezone('Asia/Seoul').strftime('%Y-%m-%d')
+        today_ymd = (context.get('data_interval_end').in_timezone('Asia/Seoul') + relativedelta(days=-1)).strftime('%Y-%m-%d')
         try:
             import pendulum
             pendulum.from_format(last_date, 'YYYY-MM-DD')
@@ -42,8 +43,8 @@ class SeoulApiTodaySensor(BaseSensorOperator):
 
         
         if last_date >= today_ymd:
-            self.log.info(f'금일 데이터{today_ymd} 생성 확인')
+            self.log.info(f'배치 일자 데이터{today_ymd} 생성 확인')
             return True
         else:
-            self.log.info(f'Update 미완료 (API Last 날짜:{last_date}, 금일 날짜: {today_ymd})')
+            self.log.info(f'Update 미완료 (API Last 날짜:{last_date}, 배치 날짜: {today_ymd})')
             return False
