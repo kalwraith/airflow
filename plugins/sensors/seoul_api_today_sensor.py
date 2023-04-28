@@ -16,7 +16,8 @@ class SeoulApiTodaySensor(BaseSensorOperator):
         self.http_conn_id = 'openapi.seoul.go.kr'
         self.endpoint = '{{var.value.apikey_openapi_seoul_go_kr}}/json/' + dataset_nm + '/1/100'   # 100건만 추출
         self.base_dt_col = base_dt_col
-
+        self.today_ymd = kwargs.get('data_interval_end').in_timezone('Asia/Seoul').strftime('%Y-%m-%d')
+        
     def poke(self, context):
         import requests
         import json
@@ -38,10 +39,10 @@ class SeoulApiTodaySensor(BaseSensorOperator):
             from airflow.exceptions import AirflowException
             AirflowException(f'{base_dt_col} 컬럼은 YYYY.MM.DD 또는 YYYY/MM/DD 형태가 아닙니다.')
 
-        today_ymd = kwargs.get('data_interval_end').in_timezone('Asia/Seoul').strftime('%Y-%m-%d')
-        if last_date >= today_ymd:
-            self.log.info(f'금일 데이터{today_ymd} 생성 확인')
+        
+        if last_date >= self.today_ymd:
+            self.log.info(f'금일 데이터{self.today_ymd} 생성 확인')
             return True
         else:
-            self.log.info(f'Update 미완료 (API Last 날짜:{last_date}, 금일 날짜: {today_ymd})')
+            self.log.info(f'Update 미완료 (API Last 날짜:{last_date}, 금일 날짜: {self.today_ymd})')
             return False
