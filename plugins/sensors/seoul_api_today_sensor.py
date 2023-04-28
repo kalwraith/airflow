@@ -21,7 +21,7 @@ class SeoulApiTodaySensor(BaseSensorOperator):
         import requests
         import json
         connection = BaseHook.get_connection(self.http_conn_id)
-        url = f'http://{connection.host}:{connection.port}/{endpoint}'
+        url = f'http://{connection.host}:{connection.port}/{self.endpoint}'
         self.log.info(f'request url:{url}')
         response = requests.get(url)
 
