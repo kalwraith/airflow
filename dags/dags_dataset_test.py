@@ -1,6 +1,7 @@
 from airflow import Dataset
 from airflow import DAG
 from airflow.operators.bash import BashOperator
+import pendulum
 
 sample_dataset = Dataset("produced_dag_dataset_test")
 
