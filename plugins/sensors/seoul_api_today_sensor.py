@@ -1,5 +1,5 @@
 from airflow.sensors.base import BaseSensorOperator
-from contextlib import closing
+from airflow.hooks.base import BaseHook
 
 '''
 서울시 공공데이터 API 추출시 특정 날짜 컬럼을 조사하여 
