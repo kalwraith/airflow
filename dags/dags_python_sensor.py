@@ -12,6 +12,7 @@ with DAG(
     def check_api_update(http_conn_id, endpoint, base_dt_col, **kwargs):
         import requests
         import json
+        import relativedelta
         connection = BaseHook.get_connection(http_conn_id)
         url = f'http://{connection.host}:{connection.port}/{endpoint}/1/100'
         response = requests.get(url)
@@ -29,11 +30,12 @@ with DAG(
             AirflowException(f'{base_dt_col} 컬럼은 YYYY.MM.DD 또는 YYYY/MM/DD 형태가 아닙니다.')
 
         today_ymd = kwargs.get('data_interval_end').in_timezone('Asia/Seoul').strftime('%Y-%m-%d')
-        if last_date >= today_ymd:
-            print(f'금일 데이터{today_ymd} 생성 확인')
+        today_d1_ymd = (kwargs.get('data_interval_end').in_timezone('Asia/Seoul') + relativedelta(days=-1)).strftime('%Y-%m-%d')
+        if last_date >= today_d1_ymd:
+            print(f'생성 확인(배치 날짜: {today_ymd} / API Last 날짜: {last_date})')
             return True
         else:
-            print(f'Update 미완료 (API Last 날짜:{last_date}, 금일 날짜: {today_ymd})')
+            print(f'Update 미완료 (배치 날짜: {today_ymd} / API Last 날짜:{last_date})')
             return False
 
     sensor_task = PythonSensor(
