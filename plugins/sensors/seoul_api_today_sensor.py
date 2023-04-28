@@ -43,7 +43,7 @@ class SeoulApiTodaySensor(BaseSensorOperator):
             AirflowException(f'{base_dt_col} 컬럼은 YYYY.MM.DD 또는 YYYY/MM/DD 형태가 아닙니다.')
 
         
-        if last_date >= today_ymd:
+        if last_date >= today_d1_ymd:
             self.log.info(f'생성 확인(배치 날짜: {today_ymd} / API Last 날짜: {last_date})')
             return True
         else:
