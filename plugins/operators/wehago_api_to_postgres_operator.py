@@ -7,7 +7,7 @@ class WehagoApiToPostgresOperator(BaseOperator):
 
     def __init__(self, api_code, dataset_nm, tgt_tbl_nm, option_dict: dict = None, **kwargs):
         super().__init__(**kwargs)
-        self.http_conn_id = 'datastore.wehago.com'
+        self.http_conn_id = 'openapi_datastore.wehago.com'
         self.postgres_conn_id = 'conn-db-postgres-custom'
         self.tgt_tbl_nm = tgt_tbl_nm
         self.endpoint = f'data/?dataset_key={dataset_nm}'
