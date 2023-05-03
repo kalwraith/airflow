@@ -9,8 +9,8 @@ with DAG(
     schedule='*/30 * * * *',
     catchup=False,
     default_args={
-        'sla':timedelta(minutes=5),
-        'email':'hjkim_sun@naver.com, kalwraith@gamil.com'
+        'sla': timedelta(minutes=5),
+        'email': ['hjkim_sun@naver.com, kalwraith@gamil.com']
     }
 ) as dag:
     
