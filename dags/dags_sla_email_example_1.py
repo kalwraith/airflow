@@ -10,7 +10,7 @@ with DAG(
     catchup=False,
     default_args={
         'sla': timedelta(minutes=5),
-        'email': ['hjkim_sun@naver.com, kalwraith@gamil.com']
+        'email': ['hjkim_sun@naver.com', 'kalwraith@gamil.com']
     }
 ) as dag:
     
