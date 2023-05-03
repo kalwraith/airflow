@@ -2,6 +2,10 @@ from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import timedelta
 import pendulum
+from airflow.models import Variable
+
+email_str = Variable.get("email_target")
+email_lst = email_str.split(',')
 
 with DAG(
     dag_id='dags_sla_email_example_1',
@@ -10,7 +14,7 @@ with DAG(
     catchup=False,
     default_args={
         'sla': timedelta(minutes=5),
-        'email': ['hjkim_sun@naver.com', 'kalwraith@gmail.com']
+        'email': email_lst
     }
 ) as dag:
     
