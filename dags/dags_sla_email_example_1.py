@@ -24,4 +24,3 @@ with DAG(
         email='hjkim_sun@naver.com'
     )
     
-    task1 >> task2
