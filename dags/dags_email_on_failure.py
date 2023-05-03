@@ -10,7 +10,7 @@ with DAG(
     schedule='0 1 * * *',
     default_args={
         'email_on_failure': True,
-        'email': 'hjkim_sun@naver.com'
+        'email': '{{var.value.email_target}}'
     }
 ) as dag:
     bash_task_1 = BashOperator(
