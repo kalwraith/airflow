@@ -29,7 +29,7 @@ with DAG(
     )
     
     task_fail = BashOperator(
-        task_id='task_sleep_60',
+        task_id='task_fail',
         bash_command='exit 1',
     )
     
