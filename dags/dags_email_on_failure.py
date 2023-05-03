@@ -9,7 +9,8 @@ with DAG(
     catchup=False,
     schedule='0 1 * * *',
     default_args={
-        'email_on_failure': True
+        'email_on_failure': True,
+        'email': 'hjkim_sun@naver.com'
     }
 ) as dag:
     bash_task_1 = BashOperator(
