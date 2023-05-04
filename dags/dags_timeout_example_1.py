@@ -11,26 +11,30 @@ email_str = Variable.get("email_target")
 email_lst = [email.strip() for email in email_str.split(',')]
 
 with DAG(
-        dag_id='dags_execution_timeout',
+        dag_id='dags_timeout_example_1',
         start_date=pendulum.datetime(2023, 5, 1, tz='Asia/Seoul'),
         catchup=False,
-        schedule='0 1 * * *',
-        dagrun_timeout=timedelta(minutes=2),
+        schedule=None,
+        dagrun_timeout=timedelta(minutes=1),
         default_args={
-            'execution_timeout': timedelta(minutes=1),
-            #'email_on_failure': True,
+            'execution_timeout': timedelta(seconds=20),
+            'email_on_failure': True,
             'email': email_lst
         }
 ) as dag:
-
-    bash_sleep_2m = BashOperator(
-        task_id='bash_sleep_2m',
-        bash_command='sleep 2m',
-    )
-    
     bash_sleep_30 = BashOperator(
         task_id='bash_sleep_30',
         bash_command='sleep 30',
     )
+
+    bash_sleep_20 = BashOperator(
+        trigger_rule='all_done',
+        task_id='bash_sleep_20',
+        bash_command='sleep 10',
+    )
+    bash_sleep_30 >> bash_sleep_20
+    
+    
+
 
 
