@@ -1,6 +1,8 @@
 # Package Import
 from airflow import DAG
 from airflow.operators.bash import BashOperator
+from airflow.decorators import task
+from airflow.exceptions import AirflowException
 import pendulum
 from datetime import timedelta
 from airflow.models import Variable
@@ -10,7 +12,7 @@ email_lst = email_str.split(',')
 
 with DAG(
     dag_id='dags_email_on_failure',
-    start_date=pendulum.datetime(2023,4,16, tz='Asia/Seoul'),
+    start_date=pendulum.datetime(2023,5,1, tz='Asia/Seoul'),
     catchup=False,
     schedule='0 1 * * *',
     dagrun_timeout=timedelta(minutes=2),
@@ -19,20 +21,13 @@ with DAG(
         'email': email_lst
     }
 ) as dag:
-    task_sleep_180 = BashOperator(
-        task_id='task_sleep_180',
-        bash_command='sleep 180',
-    )
-    task_sleep_60 = BashOperator(
-        task_id='task_sleep_60',
-        bash_command='sleep 60',
-    )
+    @task(task_id='python_fail')
+    def python_task_func():
+        AirflowException('에러 발생')
     
-    task_fail = BashOperator(
-        task_id='task_fail',
+    bash_fail = BashOperator(
+        task_id='bash_fail',
         bash_command='exit 1',
     )
-    
 
-
-
+    python_task_func() >> bash_fail
