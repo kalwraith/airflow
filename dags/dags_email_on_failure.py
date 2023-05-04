@@ -24,10 +24,11 @@ with DAG(
     @task(task_id='python_fail')
     def python_task_func():
         raise AirflowException('에러 발생')
-    
+    python_task_func()
+
     bash_fail = BashOperator(
         task_id='bash_fail',
         bash_command='exit 1',
     )
 
-    python_task_func() >> bash_fail
+    
