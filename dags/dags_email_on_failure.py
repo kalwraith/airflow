@@ -8,7 +8,7 @@ from datetime import timedelta
 from airflow.models import Variable
 
 email_str = Variable.get("email_target")
-email_lst = email_str.split(',')
+email_lst = [email.strip() for email in email_str.split(',')]
 
 with DAG(
     dag_id='dags_email_on_failure',
@@ -30,5 +30,11 @@ with DAG(
         task_id='bash_fail',
         bash_command='exit 1',
     )
+
+    bash_success = BashOperator(
+        task_id='bash_success',
+        bash_command='exit 0',
+    )
+
 
     
