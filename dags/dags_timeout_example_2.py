@@ -11,16 +11,16 @@ email_str = Variable.get("email_target")
 email_lst = [email.strip() for email in email_str.split(',')]
 
 with DAG(
-        dag_id='dags_timeout_example_2',
-        start_date=pendulum.datetime(2023, 5, 1, tz='Asia/Seoul'),
-        catchup=False,
-        schedule=None,
-        dagrun_timeout=timedelta(minutes=1),
-        default_args={
-            'execution_timeout': timedelta(seconds=40),
-            'email_on_failure': True,
-            'email': email_lst
-        }
+    dag_id='dags_timeout_example_2',
+    start_date=pendulum.datetime(2023, 5, 1, tz='Asia/Seoul'),
+    catchup=False,
+    schedule=None,
+    dagrun_timeout=timedelta(minutes=1),
+    default_args={
+        'execution_timeout': timedelta(seconds=40),
+        'email_on_failure': True,
+        'email': email_lst
+    }
 ) as dag:
     bash_sleep_35 = BashOperator(
         task_id='bash_sleep_35',
