@@ -8,7 +8,7 @@ email_str = Variable.get("email_target")
 email_lst = email_str.split(',')
 
 with DAG(
-    dag_id='dags_sla_email_example_1',
+    dag_id='dags_sla_email_example',
     start_date=pendulum.datetime(2023, 4, 1, tz='Asia/Seoul'),
     schedule='*/30 * * * *',
     catchup=False,
@@ -18,13 +18,13 @@ with DAG(
     }
 ) as dag:
     
-    task1 = BashOperator(
-        task_id='task1',
+    task_sla_5m = BashOperator(
+        task_id='task_sla_5m',
         bash_command='sleep 10m',
     )
     
-    task2 = BashOperator(
-        task_id='task2',
+    task_sla_1m = BashOperator(
+        task_id='task_sla_1m',
         bash_command='sleep 2m',
         sla=timedelta(minutes=1)
     )
