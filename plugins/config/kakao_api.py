@@ -1,4 +1,5 @@
 from datetime import datetime
+from dateutil.relativedelta import relativedelta
 import os
 import json
 
@@ -35,8 +36,8 @@ def _is_access_token_expire():
         return True
 
     else:
-        access_issued_date = datetime.fromtimestamp(os.path.getctime(TOKENS_FILE)).strftime('%Y-%m-%d %H:%M:%S')
-        if (datetime.now - access_issued_date).hours > 6:
+        access_issued_date = datetime.fromtimestamp(os.path.getmtime(TOKENS_FILE))
+        if relativedelta(datetime.now(), access_issued_date) > 6:
             return True
         else:
             return False
