@@ -1,4 +1,4 @@
-from kakao_api import send_kakao_msg
+from config.kakao_api import send_kakao_msg
 from airflow.models import Variable
 def sla_miss_callback_to_kakao(dag, task_list, blocking_task_list, slas, blocking_tis):
     '''
