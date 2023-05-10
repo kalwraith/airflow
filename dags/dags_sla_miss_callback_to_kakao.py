@@ -13,7 +13,7 @@ with DAG(
     sla_miss_callback=sla_miss_callback_to_kakao
 ) as dag:
     task_sla_35s = BashOperator(
-        task_id='task_sla_25s',
+        task_id='task_sla_35s',
         bash_command='sleep 35',
         sla=timedelta(seconds=30)
     )
