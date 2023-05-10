@@ -20,13 +20,13 @@ def sla_miss_callback_to_kakao(dag, task_list, blocking_task_list, slas, blockin
         },
     )
     client_id=Variable.get("kakao_client_secret")
-    delay_task_instance = blocking_tis[0]
-    dag_id = delay_task_instance.dag_id
+    #delay_task_instance = blocking_tis[0]
+    #dag_id = delay_task_instance.dag_id
 
     content = {}
     for task in task_list.split('\n'):
         content[task] = f'sla Miss 발생'
 
     send_kakao_msg(client_id=client_id,
-                   talk_title=f'{dag_id} SLA Miss 발생',
+                   talk_title=f'dag SLA Miss 발생',
                    content=content)
