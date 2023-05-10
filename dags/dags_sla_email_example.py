@@ -10,22 +10,33 @@ email_lst = email_str.split(',')
 with DAG(
     dag_id='dags_sla_email_example',
     start_date=pendulum.datetime(2023, 4, 1, tz='Asia/Seoul'),
-    schedule='*/30 * * * *',
+    schedule='*/10 * * * *',
     catchup=False,
     default_args={
-        'sla': timedelta(minutes=5),
+        'sla': timedelta(seconds=30),
         'email': email_lst
     }
 ) as dag:
     
-    task_sla_5m = BashOperator(
-        task_id='task_sla_5m',
-        bash_command='sleep 10m',
+    task_sleep_14 = BashOperator(
+        task_id='task_sleep_14',
+        bash_command='sleep 14'
     )
     
-    task_sla_1m = BashOperator(
-        task_id='task_sla_1m',
-        bash_command='sleep 2m',
-        sla=timedelta(minutes=1)
+    task_sleep_13 = BashOperator(
+        task_id='task_sleep_13',
+        bash_command='sleep 13'
     )
+
+    task_sleep_12 = BashOperator(
+        task_id='task_sleep_12',
+        bash_command='sleep 12'
+    )
+
+    task_sleep_11 = BashOperator(
+        task_id='task_sleep_11',
+        bash_command='sleep 11'
+    )
+
+    task_sleep_14 >> task_sleep_13 >> task_sleep_12 >> task_sleep_11
     
