@@ -87,6 +87,8 @@ def send_kakao_msg(client_id: str, talk_title: str, content: dict, **kwargs):
         print(f'try횟수: {try_cnt}, reponse 상태:{response.status_code}')     #정상: 200 / 비정상: 401
         try_cnt += 1
 
+        _refresh_token_to_variable(client_id)
+
         if response.status_code == 200:
             return response.status_code
         elif response.status_code == 401 and try_cnt <= 2:
