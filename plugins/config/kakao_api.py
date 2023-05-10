@@ -5,8 +5,6 @@ import json
 import requests
 from airflow.models import Variable
 
-
-
 REDIRECT_URL = 'https://example.com/oauth'
 
 def _refresh_token_to_variable(client_id):
@@ -27,7 +25,7 @@ def _refresh_token_to_variable(client_id):
     if new_refresh_token:
         tokens['refresh_token'] = new_refresh_token
 
-    os.system(f'airflow variables set kakao_tokens {tokens}')
+    os.system(f'airflow variables set kakao_tokens "{tokens}"')
     print('variable 업데이트 완료(key: kakao_tokens)')
 
 
