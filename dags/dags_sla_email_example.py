@@ -30,14 +30,14 @@ with DAG(
 
     task_sleep_12 = BashOperator(
         task_id='task_sleep_12',
-        bash_command='sleep 12',
-        sla=timedelta(seconds=35)
+        bash_command='sleep 40',
+        sla=timedelta(seconds=60)
     )
 
     task_sleep_11 = BashOperator(
         task_id='task_sleep_11',
-        bash_command='sleep 11',
-        sla=timedelta(seconds=35)
+        bash_command='sleep 45',
+        sla=timedelta(seconds=60)
     )
 
     task_sleep_10 = BashOperator(
