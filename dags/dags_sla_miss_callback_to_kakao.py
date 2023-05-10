@@ -15,9 +15,9 @@ with DAG(
     },
     sla_miss_callback=sla_miss_callback_to_kakao
 ) as dag:
-    task_sla_25s = BashOperator(
+    task_sla_35s = BashOperator(
         task_id='task_sla_25s',
-        bash_command='sleep 25',
+        bash_command='sleep 35',
     )
 
     task_sla_30s = BashOperator(
@@ -25,5 +25,5 @@ with DAG(
         bash_command='sleep 30',
     )
 
-    task_sla_25s >> task_sla_30s
+    task_sla_35s >> task_sla_30s
 
