@@ -19,13 +19,13 @@ def sla_miss_callback_to_kakao(dag, task_list, blocking_task_list, slas, blockin
             "blocking_tis": blocking_tis,
         },
     )
-    client_id=Variable.get("kakao_client_secret")
-    slas_lst = [i for i in slas[0]]
+    client_id = Variable.get("kakao_client_secret")
+    #slas_lst = [i for i in slas[0]]
 
     content = {}
-    content['1'] = slas_lst[2]
-    content['2'] = slas_lst[3]
-    content['3'] = slas_lst[4]
+    content['1'] = length(slas)
+    content['2'] = length(slas[0])
+    #content['3'] = slas_lst[4]
     # for task in task_list.split('\n'):
     #     content[task] = str(slas_lst[2])
 
