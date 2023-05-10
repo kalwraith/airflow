@@ -23,7 +23,7 @@ def sla_miss_callback_to_kakao(dag, task_list, blocking_task_list, slas, blockin
     #slas_lst = [i for i in slas[0]]
 
     content = {}
-    content['1'] = type(slas)
+    content['1'] = str(type(slas))
     #content['3'] = slas_lst[4]
     # for task in task_list.split('\n'):
     #     content[task] = str(slas_lst[2])
