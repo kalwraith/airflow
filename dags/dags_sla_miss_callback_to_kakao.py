@@ -24,11 +24,19 @@ with DAG(
         sla=timedelta(seconds=40)
     )
 
-    task_sla_50s = BashOperator(
+    task_sla_25s = BashOperator(
         task_id='task_sla_25s',
         bash_command='sleep 25',
         sla=timedelta(seconds=50)
     )
 
-    task_sla_35s >> task_sla_30s >> task_sla_50s
+    task_sla_10s = BashOperator(
+        task_id='task_sla_10s',
+        bash_command='sleep 10',
+        sla=timedelta(seconds=60)
+    )
+
+
+
+    task_sla_35s >> task_sla_30s >> task_sla_50s >> task_sla_10s
 
