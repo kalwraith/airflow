@@ -27,5 +27,5 @@ def sla_miss_callback_to_kakao(dag, task_list, blocking_task_list, slas, blockin
         })
 
     send_kakao_msg(client_id=client_id,
-                   talk_title=f'{dag} 수행 결과',
+                   talk_title=f'{dag} SLA Miss 발생',
                    content=content)
