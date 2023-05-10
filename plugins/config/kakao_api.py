@@ -2,6 +2,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import os
 import json
+import requests
 
 CLIENT_ID = '17ee2ef32122520198454553beeca638'
 REDIRECT_URL = 'https://example.com/oauth'
