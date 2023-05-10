@@ -12,7 +12,6 @@ with DAG(
     catchup=False,
     default_args={
         'sla': timedelta(seconds=20),
-        'email': email_lst
     },
     sla_miss_callback=sla_miss_callback_to_kakao
 ) as dag:
