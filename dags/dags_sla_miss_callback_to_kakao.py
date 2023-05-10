@@ -33,7 +33,7 @@ with DAG(
     task_sla_60s = BashOperator(
         task_id='task_sla_60s',
         bash_command='sleep 25',
-        sla=timedelta(seconds=60)
+        sla=timedelta(seconds=70)
     )
 
 
