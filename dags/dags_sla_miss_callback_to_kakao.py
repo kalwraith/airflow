@@ -8,7 +8,7 @@ from config.sla_miss_callback_func import sla_miss_callback_to_kakao
 with DAG(
     dag_id='dags_sla_miss_callback_to_kakao',
     start_date=pendulum.datetime(2023, 5, 1, tz='Asia/Seoul'),
-    schedule='*/30 * * * *',
+    schedule='*/10 * * * *',
     catchup=False,
     default_args={
         'sla': timedelta(seconds=20),
