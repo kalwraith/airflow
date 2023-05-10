@@ -3,7 +3,7 @@ from airflow.models import Variable
 def sla_miss_callback_to_kakao(dag, task_list, blocking_task_list, slas, blocking_tis):
     '''
     :param dag:
-    :param task_list:
+    :param task_list: delimiter(\n)로 구분된 list, (Ex: task_1 on 2023-05-10T006:00:00+00:00\ntask_2 on 2023-05-10T006:00:00+00:00)
     :param blocking_task_list:
     :param slas:
     :param blocking_tis:
