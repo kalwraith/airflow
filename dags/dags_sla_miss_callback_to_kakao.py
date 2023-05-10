@@ -38,5 +38,5 @@ with DAG(
 
 
 
-    task_sla_35s >> task_sla_30s >> task_sla_50s >> task_sla_10s
+    task_sla_30s >> task_sla_40s >> task_sla_50s >> task_sla_60s
 
