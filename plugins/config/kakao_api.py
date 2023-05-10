@@ -108,7 +108,9 @@ def send_kakao_msg(talk_title: str, content: dict):
 
         if response.status_code == 200:
             return response.status_code
-        elif response.status_code != 200 and try_cnt >= 2:
+        elif response.status_code == 401 and try_cnt <= 2:
+            _refresh_token_to_json()
+        elif response.status_code != 200 and try_cnt <= 3:
             return response.status_code
 
 
