@@ -37,6 +37,7 @@ def _is_access_token_expire():
 
     else:
         access_issued_date = datetime.fromtimestamp(os.path.getmtime(TOKENS_FILE))
+        print(f'발급일:{access_issued_date}')
         if relativedelta(datetime.now(), access_issued_date).hours > 6:
             return True
         else:
@@ -99,4 +100,5 @@ def send_kakao_msg(talk_title: str, content: dict):
     }
     data = {'template_object': json.dumps(list_data)}
     response = requests.post(send_url, headers=headers, data=data)
-    return response     #정상: 200 / 비정상: 401
+    print(f'reponse 상태:{response.status_code}')
+    return response.status_code     #정상: 200 / 비정상: 401
