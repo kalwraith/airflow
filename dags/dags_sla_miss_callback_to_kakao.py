@@ -25,3 +25,5 @@ with DAG(
         bash_command='sleep 30',
     )
 
+    task_sla_25s >> task_sla_30s
+
