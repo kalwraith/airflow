@@ -15,24 +15,30 @@ with DAG(
     start_date=pendulum.datetime(2023, 5, 1, tz='Asia/Seoul'),
     catchup=False,
     schedule=None,
-    dagrun_timeout=timedelta(minutes=1),
+    dagrun_timeout=timedelta(seconds=40),
     default_args={
         'execution_timeout': timedelta(seconds=20),
         'email_on_failure': True,
         'email': email_lst
     }
 ) as dag:
-    bash_sleep_30 = BashOperator(
-        task_id='bash_sleep_30',
-        bash_command='sleep 30',
+    bash_sleep_15 = BashOperator(
+        task_id='bash_sleep_15',
+        bash_command='sleep 15',
     )
 
-    bash_sleep_20 = BashOperator(
-        trigger_rule='all_done',
-        task_id='bash_sleep_20',
-        bash_command='sleep 10',
+    bash_sleep_14 = BashOperator(
+        task_id='bash_sleep_14',
+        bash_command='sleep 14',
     )
-    bash_sleep_30 >> bash_sleep_20
+
+    bash_sleep_13 = BashOperator(
+        task_id='bash_sleep_13',
+        bash_command='sleep 13',
+    )
+
+
+    bash_sleep_15 >> bash_sleep_14 >> bash_sleep_13
     
     
 
