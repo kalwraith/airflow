@@ -50,56 +50,65 @@ def send_kakao_msg(talk_title: str, content: dict):
     content:{'tltle1':'content1', 'title2':'content2'...}
     '''
 
-    ### 1) 토큰 Expire 확인
-    if _is_access_token_expire():
-        _refresh_token_to_json()
+    try_cnt = 0
+    while True:
+        ### 1) 토큰 Expire 확인
+        if _is_access_token_expire():
+            _refresh_token_to_json()
 
-    ### 2) get Access 토큰
-    with open(TOKENS_FILE, 'r') as token_file:
-        tokens = json.load(token_file)
-        access_token = tokens.get('access_token')
+        ### 2) get Access 토큰
+        with open(TOKENS_FILE, 'r') as token_file:
+            tokens = json.load(token_file)
+            access_token = tokens.get('access_token')
 
-    content_lst = []
-    button_lst = []
+        content_lst = []
+        button_lst = []
 
-    for title, msg in content.items():
-        content_lst.append({
-            'title': f'{title}',
-            'description': f'{msg}',
-            'image_url': '',
-            'image_width': 40,
-            'image_height': 40,
-            'link': {
+        for title, msg in content.items():
+            content_lst.append({
+                'title': f'{title}',
+                'description': f'{msg}',
+                'image_url': '',
+                'image_width': 40,
+                'image_height': 40,
+                'link': {
+                    'web_url': '',
+                    'mobile_web_url': ''
+                }
+            })
+            button_lst.append({
+                'title': '',
+                'link': {
+                    'web_url': '',
+                    'mobile_web_url': ''
+                }
+            })
+
+        list_data = {
+            'object_type': 'list',
+            'header_title': f'{talk_title}',
+            'header_link': {
                 'web_url': '',
-                'mobile_web_url': ''
-            }
-        })
-        button_lst.append({
-            'title': '',
-            'link': {
-                'web_url': '',
-                'mobile_web_url': ''
-            }
-        })
+                'mobile_web_url': '',
+                'android_execution_params': 'main',
+                'ios_execution_params': 'main'
+            },
+            'contents': content_lst,
+            'buttons': button_lst
+        }
 
-    list_data = {
-        'object_type': 'list',
-        'header_title': f'{talk_title}',
-        'header_link': {
-            'web_url': '',
-            'mobile_web_url': '',
-            'android_execution_params': 'main',
-            'ios_execution_params': 'main'
-        },
-        'contents': content_lst,
-        'buttons': button_lst
-    }
+        send_url = "https://kapi.kakao.com/v2/api/talk/memo/default/send"
+        headers = {
+            "Authorization": f'Bearer {access_token}'
+        }
+        data = {'template_object': json.dumps(list_data)}
+        response = requests.post(send_url, headers=headers, data=data)
+        print(f'try횟수: {try_cnt}, reponse 상태:{response.status_code}')     #정상: 200 / 비정상: 401
+        try_cnt += 1
 
-    send_url = "https://kapi.kakao.com/v2/api/talk/memo/default/send"
-    headers = {
-        "Authorization": f'Bearer {access_token}'
-    }
-    data = {'template_object': json.dumps(list_data)}
-    response = requests.post(send_url, headers=headers, data=data)
-    print(f'reponse 상태:{response.status_code}')
-    return response.status_code     #정상: 200 / 비정상: 401
+        if response.status_code == 200:
+            return response.status_code
+        elif response.status_code != 200 and try_cnt >= 2:
+            return response.status_code
+
+
