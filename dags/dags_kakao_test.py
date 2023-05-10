@@ -14,7 +14,7 @@ with DAG(
     python_kakao_test = PythonOperator(
         task_id='python_kakao_test',
         python_callable=send_kakao_msg,
-        op_kwargs={'title':'dags_kakao_test수행결과','content':{
+        op_kwargs={'talk_title':'dags_kakao_test수행결과','content':{
             'task A':'Success',
             'task B':'Failed'
         }}
