@@ -17,12 +17,12 @@ with DAG(
 ) as dag:
     task_sla_35s = BashOperator(
         task_id='task_sla_25s',
-        bash_command='sleep 35',
+        bash_command='sleep 5',
     )
 
     task_sla_30s = BashOperator(
         task_id='task_sla_30s',
-        bash_command='sleep 30',
+        bash_command='sleep 5',
     )
 
     task_sla_35s >> task_sla_30s
