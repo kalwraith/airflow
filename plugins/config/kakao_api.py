@@ -5,7 +5,7 @@ import json
 
 CLIENT_ID = '17ee2ef32122520198454553beeca638'
 REDIRECT_URL = 'https://example.com/oauth'
-BASE_TOKEN_DIR = '/opt/airflow/files'
+BASE_TOKEN_DIR = '/opt/airflow/plugins/config'
 TOKENS_FILE = f'{BASE_TOKEN_DIR}/kakao_tokens.json'
 
 def _refresh_token_to_json():
