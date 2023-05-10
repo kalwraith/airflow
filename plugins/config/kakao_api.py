@@ -10,7 +10,7 @@ from airflow.models import Variable
 REDIRECT_URL = 'https://example.com/oauth'
 
 def _refresh_token_to_variable(client_id):
-    tokens = json.load(Variable.get("kakao_tokens"))
+    tokens = json.loads(Variable.get("kakao_tokens"))
     refresh_token = tokens.get('refresh_token')
     url = "https://kauth.kakao.com/oauth/token"
     data = {
@@ -40,7 +40,7 @@ def send_kakao_msg(client_id: str, talk_title: str, content: dict, **kwargs):
     try_cnt = 0
     while True:
         ### get Access 토큰
-        tokens = json.load(Variable.get("kakao_tokens"))
+        tokens = json.loads(Variable.get("kakao_tokens"))
         access_token = tokens.get('access_token')
         content_lst = []
         button_lst = []
