@@ -37,7 +37,7 @@ def _is_access_token_expire():
 
     else:
         access_issued_date = datetime.fromtimestamp(os.path.getmtime(TOKENS_FILE))
-        if relativedelta(datetime.now(), access_issued_date) > 6:
+        if relativedelta(datetime.now(), access_issued_date).hours > 6:
             return True
         else:
             return False
