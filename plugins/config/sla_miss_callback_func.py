@@ -4,9 +4,9 @@ def sla_miss_callback_to_kakao(dag, task_list, blocking_task_list, slas, blockin
     '''
     :param dag: DAG class 객체
     :param task_list: delimiter(\n)로 구분된 string, (Ex: task_1 on 2023-05-10T006:00:00+00:00\ntask_2 on 2023-05-10T006:00:00+00:00)
-    :param blocking_task_list:
+    :param blocking_task_list: Empty list
     :param slas: list로 감싸여진 slaMiss 객체
-    :param blocking_tis:
+    :param blocking_tis: Empty list
     :return:
     '''
     print(
@@ -22,7 +22,7 @@ def sla_miss_callback_to_kakao(dag, task_list, blocking_task_list, slas, blockin
     client_id = Variable.get("kakao_client_secret")
     content = {}
     for task in task_list.split('\n'):
-        content[task] = slas[0].task_id
+        content[task] = slas[0].timestamp
 
     send_kakao_msg(client_id=client_id,
                    talk_title=f'{dag.dag_id} SLA Miss 발생',
