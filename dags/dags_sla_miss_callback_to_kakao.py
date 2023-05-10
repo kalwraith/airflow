@@ -12,27 +12,27 @@ with DAG(
     catchup=False,
     sla_miss_callback=sla_miss_callback_to_kakao
 ) as dag:
-    task_sla_35s = BashOperator(
-        task_id='task_sla_35s',
+    task_sla_30s = BashOperator(
+        task_id='task_sla_30s',
         bash_command='sleep 35',
         sla=timedelta(seconds=30)
     )
 
-    task_sla_30s = BashOperator(
-        task_id='task_sla_30s',
-        bash_command='sleep 30',
+    task_sla_40s = BashOperator(
+        task_id='task_sla_40s',
+        bash_command='sleep 25',
         sla=timedelta(seconds=40)
     )
 
-    task_sla_25s = BashOperator(
-        task_id='task_sla_25s',
+    task_sla_50s = BashOperator(
+        task_id='task_sla_50s',
         bash_command='sleep 25',
         sla=timedelta(seconds=50)
     )
 
-    task_sla_10s = BashOperator(
-        task_id='task_sla_10s',
-        bash_command='sleep 10',
+    task_sla_60s = BashOperator(
+        task_id='task_sla_60s',
+        bash_command='sleep 25',
         sla=timedelta(seconds=60)
     )
 
