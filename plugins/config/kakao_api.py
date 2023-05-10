@@ -3,64 +3,45 @@ from dateutil.relativedelta import relativedelta
 import os
 import json
 import requests
+from airflow.models import Variable
 
-CLIENT_ID = '17ee2ef32122520198454553beeca638'
+
+
 REDIRECT_URL = 'https://example.com/oauth'
-BASE_TOKEN_DIR = '/opt/airflow/plugins/config'
-TOKENS_FILE = f'{BASE_TOKEN_DIR}/kakao_tokens.json'
 
-def _refresh_token_to_json():
-    with open(TOKENS_FILE, 'w') as token_file:
-        tokens = json.load(token_file)
-        refresh_token = tokens.get('refresh_token')
-        url = "https://kauth.kakao.com/oauth/token"
-        data = {
-            "grant_type": "refresh_token",
-            "client_id": f"{CLIENT_ID}",
-            "refresh_token": f"{refresh_token}"
-        }
-        response = requests.post(url, data=data)
-        rslt = response.json()
-        new_access_token = rslt.get('access_token')
-        new_refresh_token = rslt.get('refresh_token')         # Refresh 토큰 만료기간이 30일 미만이면 refresh_token 값이 포함되어 리턴됨.
-        if new_access_token:
-            tokens['access_token'] = new_access_token
-        if new_refresh_token:
-            tokens['refresh_token'] = new_refresh_token
+def _refresh_token_to_variable(client_id):
+    tokens = json.load(Variable.get("kakao_tokens"))
+    refresh_token = tokens.get('refresh_token')
+    url = "https://kauth.kakao.com/oauth/token"
+    data = {
+        "grant_type": "refresh_token",
+        "client_id": f"{client_id}",
+        "refresh_token": f"{refresh_token}"
+    }
+    response = requests.post(url, data=data)
+    rslt = response.json()
+    new_access_token = rslt.get('access_token')
+    new_refresh_token = rslt.get('refresh_token')         # Refresh 토큰 만료기간이 30일 미만이면 refresh_token 값이 포함되어 리턴됨.
+    if new_access_token:
+        tokens['access_token'] = new_access_token
+    if new_refresh_token:
+        tokens['refresh_token'] = new_refresh_token
 
-        json.dump(tokens, token_file)
+    os.system(f'airflow variables set kakao_tokens {tokens}')
+    print('variable 업데이트 완료(key: kakao_tokens)')
 
 
 
-def _is_access_token_expire():
-    if not os.path.exists(TOKENS_FILE):
-        return True
-
-    else:
-        access_issued_date = datetime.fromtimestamp(os.path.getmtime(TOKENS_FILE))
-        print(f'발급일:{access_issued_date}')
-        if relativedelta(datetime.now(), access_issued_date).hours > 6:
-            return True
-        else:
-            return False
-
-
-def send_kakao_msg(talk_title: str, content: dict):
+def send_kakao_msg(client_id: str, talk_title: str, content: dict, **kwargs):
     '''
     content:{'tltle1':'content1', 'title2':'content2'...}
     '''
 
     try_cnt = 0
     while True:
-        ### 1) 토큰 Expire 확인
-        if _is_access_token_expire():
-            _refresh_token_to_json()
-
-        ### 2) get Access 토큰
-        with open(TOKENS_FILE, 'r') as token_file:
-            tokens = json.load(token_file)
-            access_token = tokens.get('access_token')
-
+        ### get Access 토큰
+        tokens = json.load(Variable.get("kakao_tokens"))
+        access_token = tokens.get('access_token')
         content_lst = []
         button_lst = []
 
@@ -109,8 +90,8 @@ def send_kakao_msg(talk_title: str, content: dict):
         if response.status_code == 200:
             return response.status_code
         elif response.status_code == 401 and try_cnt <= 2:
-            _refresh_token_to_json()
-        elif response.status_code != 200 and try_cnt <= 3:
+            _refresh_token_to_variable(client_id)
+        elif response.status_code != 200 and try_cnt >= 3:
             return response.status_code
 
 
