@@ -11,6 +11,8 @@ def on_failure_callback_to_kakao(context):
     data_interval_end = context.get('data_interval_end').in_timezone('Asia/Seoul')
 
     content = {f'{dag_id}.{task_id}': f'{exception}'}
+    print(client_id)
+    print(content)
     send_kakao_msg(client_id=client_id,
                    talk_title=f'task 실패 알람',
                    content=content)
