@@ -1,4 +1,4 @@
-from datetime import datetime
+import pendulum
 from dateutil.relativedelta import relativedelta
 import os
 import json
@@ -25,7 +25,7 @@ def _refresh_token_to_variable(client_id):
     if new_refresh_token:
         tokens['refresh_token'] = new_refresh_token
 
-    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    now = pendulum.now('Asia/Seoul').strftime('%Y-%m-%d %H:%M:%S')
     tokens['updated'] = now
     os.system(f'airflow variables set kakao_tokens "{tokens}"')
     print('variable 업데이트 완료(key: kakao_tokens)')
