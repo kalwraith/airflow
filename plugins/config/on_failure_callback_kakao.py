@@ -10,7 +10,7 @@ def on_failure_callback_to_kakao(context):
     task_id = ti.task_id
     data_interval_end = context.get('data_interval_end').in_timezone('Asia/Seoul')
 
-    content = {f'{dag_id}.{task_id}': f'{exception}'}
+    content = {f'{dag_id}.{task_id}': f'에러내용: {exception}', '':''}      # Content 길이는 2 이상
     print(client_id)
     print(content)
     send_kakao_msg(client_id=client_id,

@@ -84,14 +84,15 @@ def send_kakao_msg(client_id: str, talk_title: str, content: dict, **kwargs):
         }
         data = {'template_object': json.dumps(list_data)}
         response = requests.post(send_url, headers=headers, data=data)
-        print(f'try횟수: {try_cnt}, reponse 상태:{response.status_code}')     #정상: 200 / 비정상: 401
+        print(f'try횟수: {try_cnt}, reponse 상태:{response.status_code}')
         try_cnt += 1
 
-        if response.status_code == 200:
+        if response.status_code == 200:         # 200: 정상
             return response.status_code
-        elif response.status_code == 401 and try_cnt <= 2:
+        elif response.status_code == 400:       # 400: Bad Request (잘못 요청시), 무조건 break 하도록 return
+            return response.status_code
+        elif response.status_code == 401 and try_cnt <= 2:      # 401: Unauthorized (토큰 만료 등)
             _refresh_token_to_variable(client_id)
         elif response.status_code != 200 and try_cnt >= 3:
             return response.status_code
-
 

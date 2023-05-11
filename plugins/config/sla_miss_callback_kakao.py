@@ -29,6 +29,9 @@ def sla_miss_callback_to_kakao(dag, task_list, blocking_task_list, slas, blockin
         execution_date_kr = pendulum.parse(execution_date, tz='UTC').in_timezone('Asia/Seoul').strftime('%Y-%m-%dT%H:%M:%S+09:00')
         content[task_id] = 'execution_date:' + execution_date_kr
 
+    if len(content) == 1:           # content 길이는 2 이상
+        content[''] = ''
+
     send_kakao_msg(client_id=client_id,
                    talk_title=f'{dag.dag_id} SLA Miss 발생',
                    content=content)
