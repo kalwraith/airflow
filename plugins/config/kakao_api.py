@@ -93,6 +93,6 @@ def send_kakao_msg(client_id: str, talk_title: str, content: dict, **kwargs):
             return response.status_code
         elif response.status_code == 401 and try_cnt <= 2:      # 401: Unauthorized (토큰 만료 등)
             _refresh_token_to_variable(client_id)
-        elif response.status_code != 200 and try_cnt >= 3:
+        elif response.status_code != 200 and try_cnt >= 3:      # 400, 401 에러가 아닐 경우 3회 시도때 종료
             return response.status_code
 
