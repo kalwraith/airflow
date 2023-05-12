@@ -7,7 +7,8 @@ from airflow.models import Variable
 
 REDIRECT_URL = 'https://example.com/oauth'
 
-def _refresh_token_to_variable(client_id):
+def _refresh_token_to_variable():
+    client_id = Variable.get("kakao_client_secret")
     tokens = eval(Variable.get("kakao_tokens"))
     refresh_token = tokens.get('refresh_token')
     url = "https://kauth.kakao.com/oauth/token"
@@ -32,7 +33,7 @@ def _refresh_token_to_variable(client_id):
 
 
 
-def send_kakao_msg(client_id: str, talk_title: str, content: dict, **kwargs):
+def send_kakao_msg(talk_title: str, content: dict):
     '''
     content:{'tltle1':'content1', 'title2':'content2'...}
     '''
@@ -92,7 +93,7 @@ def send_kakao_msg(client_id: str, talk_title: str, content: dict, **kwargs):
         elif response.status_code == 400:       # 400: Bad Request (잘못 요청시), 무조건 break 하도록 return
             return response.status_code
         elif response.status_code == 401 and try_cnt <= 2:      # 401: Unauthorized (토큰 만료 등)
-            _refresh_token_to_variable(client_id)
+            _refresh_token_to_variable()
         elif response.status_code != 200 and try_cnt >= 3:      # 400, 401 에러가 아닐 경우 3회 시도때 종료
             return response.status_code
 

@@ -13,7 +13,6 @@ def sla_miss_callback_to_kakao(dag, task_list, blocking_task_list, slas, blockin
     :param blocking_tis: Empty list
     '''
 
-    client_id = Variable.get("kakao_client_secret")
     content = {}
     for task in task_list.split('\n'):
         task_id = task.split(' ')[0]
@@ -24,6 +23,5 @@ def sla_miss_callback_to_kakao(dag, task_list, blocking_task_list, slas, blockin
     if len(content) == 1:           # content 길이는 2 이상
         content[''] = ''
 
-    send_kakao_msg(client_id=client_id,
-                   talk_title=f'{dag.dag_id} SLA Miss 발생',
+    send_kakao_msg(talk_title=f'{dag.dag_id} SLA Miss 발생',
                    content=content)
