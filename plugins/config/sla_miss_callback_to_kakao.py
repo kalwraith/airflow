@@ -22,5 +22,4 @@ def sla_miss_callback_to_kakao(dag, task_list, blocking_task_list, slas, blockin
     if len(content) == 1:           # content 길이는 2 이상
         content[''] = ''
 
-    send_kakao_msg(talk_title=f'{dag.dag_id} SLA Miss 발생',
-                   content=content)
+    send_kakao_msg(talk_title=f'{dag.dag_id} SLA Miss 발생', content=content)
