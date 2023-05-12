@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import timedelta
 import pendulum
-from config.sla_miss_callback_kakao import sla_miss_callback_to_kakao
+from config.sla_miss_callback_to_kakao import sla_miss_callback_to_kakao
 
 
 with DAG(
@@ -35,8 +35,6 @@ with DAG(
         bash_command='sleep 60',
         sla=timedelta(minutes=5)
     )
-
-
 
     task_sla_30s >> task_sla_40s >> task_sla_50s >> task_sla_60s
 
