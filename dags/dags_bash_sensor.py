@@ -7,7 +7,10 @@ with DAG(
     dag_id='dags_bash_sensor',
     start_date=pendulum.datetime(2023,3,1, tz='Asia/Seoul'),
     schedule='0 6 * * *',
-    catchup=False
+    catchup=False,
+    default_args={
+        'owner':'xxxx'
+    }
 ) as dag:
 
     sensor_task = BashSensor(
