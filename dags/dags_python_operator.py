@@ -8,6 +8,7 @@ def python_function1():
     return_lst = []
     for i in sample_list:
         return_lst.append(i)
+        return_lst - 1
 
     print(return_lst)
 
