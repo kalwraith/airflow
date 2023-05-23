@@ -1,6 +1,7 @@
 from airflow.models.baseoperator import BaseOperator
 from airflow.hooks.base import BaseHook
 import pandas as pd 
+from operators.data_go_kr_api_to_postgres_operator import DataGoKrApiToPostgresOperator
 
 class SeoulApiToCsvOperator(BaseOperator):
     template_fields = ('endpoint', 'path','file_name','base_dt')
