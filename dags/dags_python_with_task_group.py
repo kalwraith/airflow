@@ -15,7 +15,7 @@ with DAG(
     def inner_func(**kwargs):
         from pprint import pprint
         pprint(kwargs)
-        pprint(kwargs.get('ti'))
+        pprint(kwargs.get('ti').task_id)
         msg = kwargs.get('msg') or ''
         print(msg)
 
