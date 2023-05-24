@@ -13,6 +13,9 @@ with DAG(
     catchup=False
 ) as dag:
     def inner_func(**kwargs):
+        from pprint import pprint
+        pprint(kwargs)
+        pprint(kwargs.get('ti'))
         msg = kwargs.get('msg') or ''
         print(msg)
 
@@ -24,9 +27,6 @@ with DAG(
 
         @task(task_id='inner_function1')
         def inner_func1(**kwargs):
-            from pprint import pprint
-            pprint(kwargs)
-            pprint(kwargs.get('ti'))
             print('첫 번째 TaskGroup 내 첫 번째 task입니다.')
 
         inner_function2 = PythonOperator(
